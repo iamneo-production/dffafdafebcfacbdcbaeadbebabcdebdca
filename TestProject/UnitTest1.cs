@@ -52,7 +52,7 @@ namespace dotnetapp.Tests
         [Test]
         public async Task GetStudents_ReturnsSuccess()
         {
-            HttpResponseMessage response = await _client.GetAsync("api/Students");
+            HttpResponseMessage response = await _client.GetAsync("getAllStudent");
             // Assert that the response status code is 200 OK.
             // Console.WriteLine((int)response.StatusCode);
             if((int)response.StatusCode == 200){
@@ -101,7 +101,7 @@ namespace dotnetapp.Tests
        [Test]
 public async Task PostStudents_ReturnsSuccess()
 {
-    HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "/api/Students");
+    HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "addStudent");
     request.Content = new StringContent("{\"name\": \"DemoTest\",\"department\": \"MCA\",\"phoneNumber\": \"9845612372\"}",
         Encoding.UTF8, "application/json");
     HttpResponseMessage response = await _client.SendAsync(request);
@@ -139,7 +139,7 @@ public async Task PostStudents_ReturnsSuccess()
         public async Task GetStudentsByID_ReturnsSuccess()
         {
             // Console.WriteLine(_addedStudentId);
-            HttpResponseMessage response = await _client.GetAsync("api/Students/1");
+            HttpResponseMessage response = await _client.GetAsync("getById/1");
             // Assert that the response status code is 200 OK.
             // Console.WriteLine("asd"+(int)response.StatusCode);
             // Console.WriteLine("summa"+getbyid);
