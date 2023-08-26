@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+[Route("[controller]")]
 [ApiController]
 public class StudentsController : ControllerBase
 {
@@ -15,14 +16,13 @@ public class StudentsController : ControllerBase
         _context = context;
     }
 
-[Route("/getAllStudent")]
-    [HttpGet]
+    [HttpGet("getAllStudent")]
     public async Task<ActionResult<IEnumerable<Student>>> GetStudents()
     {
         return await _context.Students.ToListAsync();
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("/getById/{id}")]
     public async Task<ActionResult<Student>> GetStudentById(int id)
     {
         var student = await _context.Students.FindAsync(id);
@@ -35,7 +35,7 @@ public class StudentsController : ControllerBase
         return student;
     }
 
-    [HttpPost]
+    [HttpPost("addStudent")]
     public async Task<ActionResult<Student>> CreateStudent(Student student)
     {
         _context.Students.Add(student);
