@@ -54,7 +54,7 @@ namespace dotnetapp.Tests
         {
             HttpResponseMessage response = await _client.GetAsync("api/Students");
             // Assert that the response status code is 200 OK.
-            Console.WriteLine((int)response.StatusCode);
+            // Console.WriteLine((int)response.StatusCode);
             if((int)response.StatusCode == 200){
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);}
             else{
@@ -62,7 +62,7 @@ namespace dotnetapp.Tests
             }
             // Assert that the response content is not empty.
             string responseBody = await response.Content.ReadAsStringAsync();
-            Console.WriteLine(responseBody);
+            // Console.WriteLine(responseBody);
             Assert.IsNotEmpty(responseBody);
         }
 
@@ -111,12 +111,12 @@ public async Task PostStudents_ReturnsSuccess()
         Assert.AreEqual(HttpStatusCode.Created, response.StatusCode);
 
         string responseBody = await response.Content.ReadAsStringAsync();
-        Console.WriteLine($"Response Body: {responseBody}");
+        // Console.WriteLine($"Response Body: {responseBody}");
 
         JObject jsonResponse = JObject.Parse(responseBody);
         int _addedStudentId = (int)jsonResponse["id"];
         // getbyid = addedStudentId;
-        Console.WriteLine($"Added Student ID: {_addedStudentId}");
+        // Console.WriteLine($"Added Student ID: {_addedStudentId}");
 
         var addedStudent = await _context.Students.FirstOrDefaultAsync(s => s.Id == _addedStudentId);
 
@@ -141,7 +141,7 @@ public async Task PostStudents_ReturnsSuccess()
             // Console.WriteLine(_addedStudentId);
             HttpResponseMessage response = await _client.GetAsync("api/Students/1");
             // Assert that the response status code is 200 OK.
-            Console.WriteLine("asd"+(int)response.StatusCode);
+            // Console.WriteLine("asd"+(int)response.StatusCode);
             // Console.WriteLine("summa"+getbyid);
             if((int)response.StatusCode == 200){
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);}
