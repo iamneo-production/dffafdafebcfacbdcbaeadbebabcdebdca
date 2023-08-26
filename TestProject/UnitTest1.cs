@@ -22,7 +22,7 @@ namespace dotnetapp.Tests
         private Type _studentType;
         private PropertyInfo[] _studentProperties; 
         private Type _controllerType;
-        private static int _addedStudentId;
+        private int lastadded;
         
         private ApplicationDbContext _context;
         private HttpClient _client;
@@ -114,7 +114,7 @@ public async Task PostStudents_ReturnsSuccess()
         Console.WriteLine($"Response Body: {responseBody}");
 
         JObject jsonResponse = JObject.Parse(responseBody);
-        _addedStudentId = (int)jsonResponse["id"];
+        int _addedStudentId = (int)jsonResponse["id"];
         // getbyid = addedStudentId;
         Console.WriteLine($"Added Student ID: {_addedStudentId}");
 
@@ -135,13 +135,13 @@ public async Task PostStudents_ReturnsSuccess()
     Assert.IsNotEmpty(otherResponseBody);
 }
 
-[Test]
+        [Test]
         public async Task GetStudentsByID_ReturnsSuccess()
         {
-            Console.WriteLine(_addedStudentId);
-            HttpResponseMessage response = await _client.GetAsync("api/Students/");
+            // Console.WriteLine(_addedStudentId);
+            HttpResponseMessage response = await _client.GetAsync("api/Students/44");
             // Assert that the response status code is 200 OK.
-            Console.WriteLine((int)response.StatusCode);
+            Console.WriteLine("asd"+(int)response.StatusCode);
             // Console.WriteLine("summa"+getbyid);
             if((int)response.StatusCode == 200){
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);}
