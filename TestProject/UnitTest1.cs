@@ -44,8 +44,12 @@ namespace dotnetapp.Tests
         {
             HttpResponseMessage response = await _client.GetAsync("api/Students");
             // Assert that the response status code is 200 OK.
-            Console.WriteLine(response.StatusCode);
-            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+            Console.WriteLine((int)response.StatusCode);
+            if((int)response.StatusCode == 200){
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);}
+            else{
+                Assert.Fail();
+            }
             // Assert that the response content is not empty.
             string responseBody = await response.Content.ReadAsStringAsync();
             Console.WriteLine(responseBody);
