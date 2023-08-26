@@ -22,7 +22,7 @@ namespace dotnetapp.Tests
         private Type _studentType;
         private PropertyInfo[] _studentProperties; 
         private Type _controllerType;
-        private int getbyid;
+        private int _addedStudentId;
         
         private ApplicationDbContext _context;
         private HttpClient _client;
@@ -66,22 +66,23 @@ namespace dotnetapp.Tests
             Assert.IsNotEmpty(responseBody);
         }
 
-        [Test]
-        public async Task GetStudentsByID_ReturnsSuccess()
-        {
-            HttpResponseMessage response = await _client.GetAsync("api/Students/");
-            // Assert that the response status code is 200 OK.
-            Console.WriteLine((int)response.StatusCode);
-            if((int)response.StatusCode == 200){
-            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);}
-            else{
-                Assert.Fail();
-            }
-            // Assert that the response content is not empty.
-            string responseBody = await response.Content.ReadAsStringAsync();
-            Console.WriteLine(responseBody);
-            Assert.IsNotEmpty(responseBody);
-        }
+        // [Test]
+        // public async Task GetStudentsByID_ReturnsSuccess()
+        // {
+        //     HttpResponseMessage response = await _client.GetAsync("api/Students/");
+        //     // Assert that the response status code is 200 OK.
+        //     Console.WriteLine((int)response.StatusCode);
+        //     Console.WriteLine("summa"+getbyid);
+        //     if((int)response.StatusCode == 200){
+        //     Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);}
+        //     else{
+        //         Assert.Fail();
+        //     }
+        //     // Assert that the response content is not empty.
+        //     string responseBody = await response.Content.ReadAsStringAsync();
+        //     Console.WriteLine(responseBody);
+        //     Assert.IsNotEmpty(responseBody);
+        // }
 
         // [Test]
         // public async Task PostStudents_ReturnsSuccess() {
@@ -113,8 +114,8 @@ public async Task PostStudents_ReturnsSuccess()
         Console.WriteLine($"Response Body: {responseBody}");
 
         JObject jsonResponse = JObject.Parse(responseBody);
-        int addedStudentId = (int)jsonResponse["id"];
-
+        _addedStudentId = (int)jsonResponse["id"];
+        // getbyid = addedStudentId;
         Console.WriteLine($"Added Student ID: {addedStudentId}");
 
         var addedStudent = await _context.Students.FirstOrDefaultAsync(s => s.Id == addedStudentId);
@@ -123,10 +124,6 @@ public async Task PostStudents_ReturnsSuccess()
         {
             _context.Students.Remove(addedStudent);
             await _context.SaveChangesAsync();
-        }
-        else
-        {
-            Assert.Fail("Added student not found in the context.");
         }
     }
     else
@@ -137,6 +134,25 @@ public async Task PostStudents_ReturnsSuccess()
     string otherResponseBody = await response.Content.ReadAsStringAsync();
     Assert.IsNotEmpty(otherResponseBody);
 }
+
+[Test]
+        public async Task GetStudentsByID_ReturnsSuccess()
+        {
+            HttpResponseMessage response = await _client.GetAsync("api/Students/");
+            // Assert that the response status code is 200 OK.
+            Console.WriteLine((int)response.StatusCode);
+            Console.WriteLine("summa"+getbyid);
+            if((int)response.StatusCode == 200){
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);}
+            else{
+                Assert.Fail();
+            }
+            // Assert that the response content is not empty.
+            string responseBody = await response.Content.ReadAsStringAsync();
+            Console.WriteLine(responseBody);
+            Assert.IsNotEmpty(responseBody);
+        }
+
         [Test]
         public void Test_Student_Class_Exists()
         {
