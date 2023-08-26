@@ -99,8 +99,8 @@ public async Task PostStudents_ReturnsSuccess()
         Console.WriteLine(addedStudentId);
 
         // Fetch the added student using the correct ID
-        var addedStudent = await _context.Students.FindAsync(33);
-        Console.WriteLine(addedStudent);
+        var addedStudent = await _context.Students.FirstOrDefaultAsync(s => s.Id == addedStudentId);
+        Console.WriteLine(addedStudent.Id);
 
         if (addedStudent != null)
         {
