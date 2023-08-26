@@ -85,22 +85,17 @@ public async Task PostStudents_ReturnsSuccess()
         Assert.AreEqual(HttpStatusCode.Created, response.StatusCode);
 
         string responseBody = await response.Content.ReadAsStringAsync();
-        Console.WriteLine(responseBody.id);
+        JObject jsonResponse = JObject.Parse(responseBody);
+        
+        // Extract the id as an integer
+        int addedStudentId = (int)jsonResponse["id"];
 
-        // If the response body contains the added student's ID
-        if (int.TryParse(responseBody, out int addedStudentId))
+        // Remove the added student from the context
+        var addedStudent = await _context.Students.FindAsync(addedStudentId);
+        if (addedStudent != null)
         {
-            // Remove the added student from the context
-            var addedStudent = await _context.Students.FindAsync(addedStudentId);
-            if (addedStudent != null)
-            {
-                _context.Students.Remove(addedStudent);
-                await _context.SaveChangesAsync();
-            }
-        }
-        else
-        {
-            Assert.Fail("Unable to parse the added student's ID from the response body.");
+            _context.Students.Remove(addedStudent);
+            await _context.SaveChangesAsync();
         }
     }
     else
