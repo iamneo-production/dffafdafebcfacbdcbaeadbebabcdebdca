@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-[Route("api/[controller]")]
 [ApiController]
 public class StudentsController : ControllerBase
 {
@@ -16,6 +15,7 @@ public class StudentsController : ControllerBase
         _context = context;
     }
 
+[Route("/getAllStudent")]
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Student>>> GetStudents()
     {
