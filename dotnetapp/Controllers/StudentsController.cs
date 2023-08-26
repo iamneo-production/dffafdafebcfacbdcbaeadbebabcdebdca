@@ -42,6 +42,7 @@ public class StudentsController : ControllerBase
     [HttpPost("addStudent")]
     public async Task<ActionResult<Student>> CreateStudent(Student student)
     {
+        Console.WriteLine(student);
         _context.Students.Add(student);
         await _context.SaveChangesAsync();
 
