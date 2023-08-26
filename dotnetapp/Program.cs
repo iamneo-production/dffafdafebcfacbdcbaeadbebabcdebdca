@@ -11,10 +11,20 @@ builder.Services.AddControllers();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DevConnection")));
+builder.Services.AddCors();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowOrigin", builder => builder
+        .WithOrigins("https://8081-dffafdafebcfacbdcbaeadfdfbaabfff.premiumproject.examly.io") // Replace with your allowed origins
+        .AllowAnyMethod()
+        .AllowAnyHeader()
+        .WithExposedHeaders("Content-Disposition"));
+});
 
 var app = builder.Build();
 
@@ -28,6 +38,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+app.UseCors("AllowOrigin");
 
 app.MapControllers();
 

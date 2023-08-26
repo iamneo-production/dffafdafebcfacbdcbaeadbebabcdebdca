@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 [Route("")]
 [ApiController]
+[EnableCors("AllowOrigin")]
+
 public class StudentsController : ControllerBase
 {
     private readonly ApplicationDbContext _context;
