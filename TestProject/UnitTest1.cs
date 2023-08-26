@@ -56,17 +56,60 @@ namespace dotnetapp.Tests
             Assert.IsNotEmpty(responseBody);
         }
 
+        // [Test]
+        // public async Task PostStudents_ReturnsSuccess() {
+        //     HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "/api/Students");
+        //     request.Content = new StringContent("{\"name\": \"DemoTest\",\"department\": \"MCA\",\"phoneNumber\": \"9845612372\"}",
+        //     Encoding.UTF8, "application/json");
+        //     HttpResponseMessage response = await _client.SendAsync(request);
+        //     if((int)response.StatusCode == 201){
+        //     Assert.AreEqual(HttpStatusCode.Created, response.StatusCode);
+        //     }else{
+        //         Assert.Fail();
+        //     }
+        //     string responseBody = await response.Content.ReadAsStringAsync();
+        //     Assert.IsNotEmpty(responseBody);
+        // }
         [Test]
-        public async Task PostStudents_ReturnsSuccess() {
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "/api/Students");
-            request.Content = new StringContent("{\"name\": \"DemoTest\",\"department\": \"MCA\",\"phoneNumber\": \"9845612372\"}",
-            Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await _client.SendAsync(request);
-            if()
-            Assert.AreEqual(HttpStatusCode.Created, response.StatusCode);
-            string responseBody = await response.Content.ReadAsStringAsync();
-            Assert.IsNotEmpty(responseBody);
+public async Task PostStudents_ReturnsSuccess()
+{
+    HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "/api/Students");
+    request.Content = new StringContent("{\"name\": \"DemoTest\",\"department\": \"MCA\",\"phoneNumber\": \"9845612372\"}",
+    Encoding.UTF8, "application/json");
+    HttpResponseMessage response = await _client.SendAsync(request);
+
+    if ((int)response.StatusCode == 201)
+    {
+        Assert.AreEqual(HttpStatusCode.Created, response.StatusCode);
+
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        // If the response body contains the added student's ID
+        if (int.TryParse(responseBody, out int addedStudentId))
+        {
+            // Remove the added student from the context
+            var addedStudent = await _context.Students.FindAsync(addedStudentId);
+            if (addedStudent != null)
+            {
+                _context.Students.Remove(addedStudent);
+                await _context.SaveChangesAsync();
+            }
         }
+        else
+        {
+            Assert.Fail("Unable to parse the added student's ID from the response body.");
+        }
+    }
+    else
+    {
+        Assert.Fail();
+    }
+
+    string responseBody = await response.Content.ReadAsStringAsync();
+    Assert.IsNotEmpty(responseBody);
+}
+
+
 
         [Test]
         public void Test_Student_Class_Exists()
