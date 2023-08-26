@@ -10,6 +10,8 @@ using System.Net;
 using System.Net.Http;
 using Newtonsoft.Json;
 using System.Text;
+using Newtonsoft.Json.Linq;
+
 
 
 namespace dotnetapp.Tests
@@ -83,6 +85,7 @@ public async Task PostStudents_ReturnsSuccess()
         Assert.AreEqual(HttpStatusCode.Created, response.StatusCode);
 
         string responseBody = await response.Content.ReadAsStringAsync();
+        Console.WriteLine(responseBody.id);
 
         // If the response body contains the added student's ID
         if (int.TryParse(responseBody, out int addedStudentId))
@@ -105,8 +108,8 @@ public async Task PostStudents_ReturnsSuccess()
         Assert.Fail();
     }
 
-    string responseBody = await response.Content.ReadAsStringAsync();
-    Assert.IsNotEmpty(responseBody);
+    string otherResponseBody = await response.Content.ReadAsStringAsync();
+    Assert.IsNotEmpty(otherResponseBody);
 }
 
 
