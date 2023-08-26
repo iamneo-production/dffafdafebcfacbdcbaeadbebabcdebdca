@@ -93,16 +93,17 @@ public async Task PostStudents_ReturnsSuccess()
 
         string responseBody = await response.Content.ReadAsStringAsync();
         JObject jsonResponse = JObject.Parse(responseBody);
-        
+
         // Extract the id as an integer
         int addedStudentId = (int)jsonResponse["id"];
         Console.WriteLine(addedStudentId);
 
-        // Remove the added student from the context
-        var addedStudent = await _context.Students.FindAsync(18);
-        Console.WriteLine("ghj"+addedStudent);
+        // Fetch the added student using the correct ID
+        var addedStudent = await _context.Students.FindAsync(addedStudentId-1);
+
         if (addedStudent != null)
         {
+            // Remove the added student from the context
             _context.Students.Remove(addedStudent);
             await _context.SaveChangesAsync();
         }
