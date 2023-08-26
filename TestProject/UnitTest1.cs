@@ -22,6 +22,7 @@ namespace dotnetapp.Tests
         private Type _studentType;
         private PropertyInfo[] _studentProperties; 
         private Type _controllerType;
+        
         private ApplicationDbContext _context;
         private HttpClient _client;
 
