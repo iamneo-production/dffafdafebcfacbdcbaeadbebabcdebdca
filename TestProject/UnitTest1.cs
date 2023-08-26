@@ -79,7 +79,7 @@ namespace dotnetapp.Tests
         //     string responseBody = await response.Content.ReadAsStringAsync();
         //     Assert.IsNotEmpty(responseBody);
         // }
-        [Test]
+       [Test]
 public async Task PostStudents_ReturnsSuccess()
 {
     HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "/api/Students");
@@ -92,26 +92,33 @@ public async Task PostStudents_ReturnsSuccess()
         Assert.AreEqual(HttpStatusCode.Created, response.StatusCode);
 
         string responseBody = await response.Content.ReadAsStringAsync();
-        JObject jsonResponse = JObject.Parse(responseBody);
+        Console.WriteLine($"Response Body: {responseBody}");
 
+        JObject jsonResponse = JObject.Parse(responseBody);
         int addedStudentId = (int)jsonResponse["id"];
+        Console.WriteLine($"Added Student ID: {addedStudentId}");
 
         var addedStudent = await _context.Students.FirstOrDefaultAsync(s => s.Id == addedStudentId);
 
-        // if (addedStudent != null)
+        if (addedStudent != null)
         {
             _context.Students.Remove(addedStudent);
             await _context.SaveChangesAsync();
         }
+        else
+        {
+            Assert.Fail("Added student not found in the context.");
+        }
     }
     else
     {
-        Assert.Fail();
+        Assert.Fail("Failed to create student.");
     }
 
     string otherResponseBody = await response.Content.ReadAsStringAsync();
     Assert.IsNotEmpty(otherResponseBody);
 }
+
 
 
 
