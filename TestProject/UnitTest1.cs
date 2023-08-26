@@ -136,23 +136,46 @@ public async Task PostStudents_ReturnsSuccess()
 }
 
         [Test]
-        public async Task GetStudentsByID_ReturnsSuccess()
+public async Task GetStudentsByID_ReturnsSuccess()
+{
+    HttpResponseMessage response = await _client.GetAsync("api/Students/44");
+
+    if ((int)response.StatusCode == 200)
+    {
+        Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+
+        string responseBody = await response.Content.ReadAsStringAsync();
+        var student = JsonConvert.DeserializeObject<Student>(responseBody);
+
+        if (student != null)
         {
-            // Console.WriteLine(_addedStudentId);
-            HttpResponseMessage response = await _client.GetAsync("api/Students/44");
-            // Assert that the response status code is 200 OK.
-            Console.WriteLine("asd"+(int)response.StatusCode);
-            // Console.WriteLine("summa"+getbyid);
-            if((int)response.StatusCode == 200){
-            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);}
-            else{
-                Assert.Fail();
+            // Fetch the student from the context by ID
+            var fetchedStudent = await _context.Students.FirstOrDefaultAsync(s => s.Id == student.Id);
+
+            if (fetchedStudent != null)
+            {
+                _context.Students.Remove(fetchedStudent);
+                await _context.SaveChangesAsync();
             }
-            // Assert that the response content is not empty.
-            string responseBody = await response.Content.ReadAsStringAsync();
-            Console.WriteLine(responseBody);
-            Assert.IsNotEmpty(responseBody);
+            else
+            {
+                Assert.Fail("Fetched student not found in the context.");
+            }
         }
+        else
+        {
+            Assert.Fail("Deserialized student is null.");
+        }
+    }
+    else
+    {
+        Assert.Fail();
+    }
+
+    string otherResponseBody = await response.Content.ReadAsStringAsync();
+    Assert.IsNotEmpty(otherResponseBody);
+}
+
 
         [Test]
         public void Test_Student_Class_Exists()
