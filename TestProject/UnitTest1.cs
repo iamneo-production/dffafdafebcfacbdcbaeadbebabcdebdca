@@ -84,55 +84,35 @@ public async Task PostStudents_ReturnsSuccess()
 {
     HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "/api/Students");
     request.Content = new StringContent("{\"name\": \"DemoTest\",\"department\": \"MCA\",\"phoneNumber\": \"9845612372\"}",
-    Encoding.UTF8, "application/json");
+        Encoding.UTF8, "application/json");
     HttpResponseMessage response = await _client.SendAsync(request);
 
     if ((int)response.StatusCode == 201)
     {
         Assert.AreEqual(HttpStatusCode.Created, response.StatusCode);
-        var createdData = JsonConvert.DeserializeObject<Students>(otherResponseBody);
-using (var dbContext = new YourDbContext())
-{
-    var entity = dbContext.YourModels.Find(createdData.Id);
-    if (entity != null)
+
+        string responseBody = await response.Content.ReadAsStringAsync();
+        JObject jsonResponse = JObject.Parse(responseBody);
+
+        int addedStudentId = (int)jsonResponse["id"];
+
+        var addedStudent = await _context.Students.FirstOrDefaultAsync(s => s.Id == addedStudentId);
+
+        // if (addedStudent != null)
+        {
+            _context.Students.Remove(addedStudent);
+            await _context.SaveChangesAsync();
+        }
+    }
+    else
     {
-        dbContext.YourModels.Remove(entity);
-        await dbContext.SaveChangesAsync();
+        Assert.Fail();
     }
-}
-
-    }
-
-
-
-    //     string responseBody = await response.Content.ReadAsStringAsync();
-    //     JObject jsonResponse = JObject.Parse(responseBody);
-
-    //     // Extract the id as an integer
-    //     int addedStudentId = (int)jsonResponse["id"];
-    //     Console.WriteLine(addedStudentId);
-
-    //     // Fetch the added student using the correct ID
-    //     var addedStudent = await _context.Students.FirstOrDefaultAsync(s => s.Id == addedStudentId);
-    //     Console.WriteLine(addedStudent.Id);
-
-    //     if (addedStudent != null)
-    //     {
-    //         // Remove the added student from the context
-    //         _context.Students.Remove(addedStudent);
-    //         await _context.SaveChangesAsync();
-    //     }
-    // }
-    // else
-    // {
-    //     Assert.Fail();
-    // }
 
     string otherResponseBody = await response.Content.ReadAsStringAsync();
     Assert.IsNotEmpty(otherResponseBody);
-
-    
 }
+
 
 
 
