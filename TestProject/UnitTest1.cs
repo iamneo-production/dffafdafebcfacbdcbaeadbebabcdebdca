@@ -34,7 +34,13 @@ namespace dotnetapp.Tests
             _studentType = new Student().GetType();
             _studentProperties = _studentType.GetProperties();
             _controllerType = typeof(StudentsController);
-            _context = new ApplicationDbContext(new DbContextOptions<ApplicationDbContext>());
+
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+        .UseInMemoryDatabase(databaseName: "TestDatabase")
+        .Options;
+
+    _context = new ApplicationDbContext(options);
+            // _context = new ApplicationDbContext(new DbContextOptions<ApplicationDbContext>());
 
             _client = new HttpClient();
             _client.BaseAddress = new System.Uri("http://localhost:8080/");
@@ -90,9 +96,11 @@ public async Task PostStudents_ReturnsSuccess()
         
         // Extract the id as an integer
         int addedStudentId = (int)jsonResponse["id"];
+        Console.WriteLine(addedStudentId);
 
         // Remove the added student from the context
-        var addedStudent = await _context.Students.FindAsync(addedStudentId);
+        var addedStudent = await _context.Students.FindAsync(18);
+        Console.WriteLine("ghj"+addedStudent);
         if (addedStudent != null)
         {
             _context.Students.Remove(addedStudent);
