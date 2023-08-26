@@ -26,7 +26,7 @@ public class StudentsController : ControllerBase
         return await _context.Students.ToListAsync();
     }
 
-    [HttpGet("/getById/{id}")]
+    [HttpGet("getById/{id}")]
     public async Task<ActionResult<Student>> GetStudentById(int id)
     {
         var student = await _context.Students.FindAsync(id);
