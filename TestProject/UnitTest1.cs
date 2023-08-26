@@ -7,6 +7,8 @@ using dotnetapp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
+using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace dotnetapp.Tests
 {
@@ -54,13 +56,12 @@ namespace dotnetapp.Tests
 
         // request.Content = new StringContent("{\"name\": \"John\", \"age\": 30}",
 
-        request.Content = new StringContent("{\"name\": \"demo\",\"password\": \"DEMOdemo\"}",
-
+        request.Content = new StringContent("{\\"name\": \"DemoTest\","name\": \"DemoTest\",\"department\": \"MCA\",\"phoneNumber\": \"9845612372\"}",
         Encoding.UTF8, "application/json");
 
         // Send the request to the API endpoint.
 
-        HttpResponseMessage response = await _httpClient.SendAsync(request);
+        HttpResponseMessage response = await _client.SendAsync(request);
 
         // Assert that the response status code is 201 Created.
 
