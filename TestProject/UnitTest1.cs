@@ -40,10 +40,38 @@ namespace dotnetapp.Tests
         {
             HttpResponseMessage response = await _client.GetAsync("api/Students");
             // Assert that the response status code is 200 OK.
+            Console.WriteLine(response.StatusCode);
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
             // Assert that the response content is not empty.
             string responseBody = await response.Content.ReadAsStringAsync();
+            Console.WriteLine(responseBody);
             Assert.IsNotEmpty(responseBody);
+        }
+
+        [Test]
+        public async Task test_case6() {
+        HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "/api/Students");
+
+        // request.Content = new StringContent("{\"name\": \"John\", \"age\": 30}",
+
+        request.Content = new StringContent("{\"name\": \"demo\",\"password\": \"DEMOdemo\"}",
+
+        Encoding.UTF8, "application/json");
+
+        // Send the request to the API endpoint.
+
+        HttpResponseMessage response = await _httpClient.SendAsync(request);
+
+        // Assert that the response status code is 201 Created.
+
+        Assert.AreEqual(HttpStatusCode.Created, response.StatusCode);
+
+        // Assert that the response content is not empty.
+
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        Assert.IsNotEmpty(responseBody);
+
         }
 
         [Test]
