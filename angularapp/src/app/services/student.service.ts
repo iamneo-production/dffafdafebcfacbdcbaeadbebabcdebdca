@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class StudentService {
-  private baseUrl = 'https://8080-dffafdafebcfacbdcbaeadfdfbaabfff.premiumproject.examly.io'; // Your backend URL
+  private baseUrl = 'https://8080-dffafdafebcfacbdcbaeadbebabcdebdca.premiumproject.examly.io'; // Your backend URL
 
   constructor(private http: HttpClient) {}
 
@@ -15,6 +15,7 @@ export class StudentService {
   }
 
   createStudent(student: any): Observable<any> {
+    student.id = 0;
     return this.http.post<any>(`${this.baseUrl}/addStudent`, student);
   }
 
