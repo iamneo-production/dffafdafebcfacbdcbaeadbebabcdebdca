@@ -20,7 +20,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowOrigin", builder => builder
-        .WithOrigins("https://8081-dffafdafebcfacbdcbaeadfdfbaabfff.premiumproject.examly.io") // Replace with your allowed origins
+        .WithOrigins("https://8081-dffafdafebcfacbdcbaeadbebabcdebdca.premiumproject.examly.io") // Replace with your allowed origins
         .AllowAnyMethod()
         .AllowAnyHeader()
         .WithExposedHeaders("Content-Disposition"));
