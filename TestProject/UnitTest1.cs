@@ -139,7 +139,7 @@ public async Task PostStudents_ReturnsSuccess()
         public async Task GetStudentsByID_ReturnsSuccess()
         {
             // Console.WriteLine(_addedStudentId);
-            HttpResponseMessage response = await _client.GetAsync("getById/1");
+            HttpResponseMessage response = await _client.GetAsync("getById/64");
             // Assert that the response status code is 200 OK.
             // Console.WriteLine("asd"+(int)response.StatusCode);
             // Console.WriteLine("summa"+getbyid);
