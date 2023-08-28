@@ -40,6 +40,10 @@ namespace dotnetapp.Tests
             Assert.AreEqual("Sample Department", addedDept.Name);
         }
 
-        // Other test methods for CRUD, relationships, constraints, etc.
+        [Test]
+        public void Test_Student_Class_Exists()
+        {
+            Assert.NotNull(_studentType);
+        }
     }
 }
