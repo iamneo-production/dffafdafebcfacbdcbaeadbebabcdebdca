@@ -17,6 +17,7 @@ namespace dotnetapp.Tests
         private Type _deptType;
         private Type _employeeType;
         private PropertyInfo[] _deptProperties;
+        private PropertyInfo[] _employeeProperties;
 
 
 
@@ -26,6 +27,7 @@ namespace dotnetapp.Tests
             _deptType = new Dept().GetType();
             _employeeType = new Employee().GetType();
             _deptProperties = _deptType.GetProperties();
+            _employeeProperties = _employeeType.GetProperties();
 
             // Set up the database context before running each test
             var options = new DbContextOptionsBuilder<EMSDbContext>()
@@ -79,11 +81,33 @@ namespace dotnetapp.Tests
         }
 
         [Test]
-        public void Test_Dept_Department_Property_DataType()
+        public void Test_Dept_Location_Property_DataType()
         {
             var departmentProperty = _deptProperties.FirstOrDefault(prop => prop.Name == "Location");
             Assert.NotNull(departmentProperty);
             Assert.AreEqual(typeof(string), departmentProperty.PropertyType);
+        }
+
+        [Test]
+        public void Test_Employee_Id_Property_DataType()
+        {
+            var idProperty = _employeeProperties.FirstOrDefault(prop => prop.Name == "Id");
+            Assert.NotNull(idProperty);
+            Assert.AreEqual(typeof(int), idProperty.PropertyType);
+        }
+
+        [Test]
+        public void ApplicationDbContextContainsDbSetSlotProperty()
+        {
+            // using (var context = new ApplicationDbContext(_dbContextOptions))
+            //         {
+            // var context = new ApplicationDbContext();
+        
+            var propertyInfo = _context.GetType().GetProperty("Bookings");
+        
+            Assert.IsNotNull(propertyInfo);
+            Assert.AreEqual(typeof(DbSet<Booking>), propertyInfo.PropertyType);
+                    // }
         }
     }
 }
