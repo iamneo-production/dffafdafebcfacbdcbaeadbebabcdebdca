@@ -119,6 +119,20 @@ namespace dotnetapp.Tests
         }
 
         [Test]
+        public void EMSDbContextContainsDbSetDempProperty()
+        {
+            // using (var context = new ApplicationDbContext(_dbContextOptions))
+            //         {
+            // var context = new ApplicationDbContext();
+        
+            var propertyInfo = _context.GetType().GetProperty("Depts");
+        
+            Assert.IsNotNull(propertyInfo);
+            Assert.AreEqual(typeof(DbSet<Dept>), propertyInfo.PropertyType);
+                    // }
+        }
+
+        [Test]
         public void ApplicationDbContextContainsDbSetSlotProperty()
         {
             // using (var context = new ApplicationDbContext(_dbContextOptions))
