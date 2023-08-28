@@ -37,7 +37,7 @@ namespace dotnetapp.Tests
                 .Options;
 
             _options1 = new DbContextOptionsBuilder<EMSDbContext>()
-                .UseInMemoryDatabase(databaseName: "TestDatabase")
+                .UseInMemoryDatabase(databaseName: "TestDatabase1")
                 .Options;
 
             _context = new EMSDbContext(options);
