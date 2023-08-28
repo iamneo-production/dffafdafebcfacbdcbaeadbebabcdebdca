@@ -157,7 +157,7 @@ public void Employee_ForeignKey_To_Dept_Should_Exist()
         Name = "John Doe",
         Email = "john@example.com",
         Salary = 50000,
-        Deptid = 112, // Referencing the existing Department 1
+        Deptid = 11, // Referencing the existing Department 1
         Dateofbirth = new DateTime(1990, 1, 1)
     };
 
