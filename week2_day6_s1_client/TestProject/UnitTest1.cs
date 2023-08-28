@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
+
 
 
 namespace dotnetapp.Tests
@@ -14,13 +16,18 @@ namespace dotnetapp.Tests
         private EMSDbContext _context;
         private Type _deptType;
         private Type _employeeType;
+        private PropertyInfo[] _deptProperties;
+
 
 
         [SetUp]
         public void Setup()
         {
             _deptType = new Dept().GetType();
-            _deptType = new Dept().GetType();
+            _employeeType = new Employee().GetType();
+            _deptProperties = _deptType.GetProperties();
+
+
 
             // Set up the database context before running each test
             var options = new DbContextOptionsBuilder<EMSDbContext>()
@@ -55,7 +62,7 @@ namespace dotnetapp.Tests
         [Test]
         public void Test_Employee_Class_Exists()
         {
-            Assert.NotNull(_deptType);
+            Assert.NotNull(_employeeType);
         }
     }
 }
