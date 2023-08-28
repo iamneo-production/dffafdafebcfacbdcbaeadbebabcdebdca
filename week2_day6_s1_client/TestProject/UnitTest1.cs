@@ -18,7 +18,7 @@ namespace dotnetapp.Tests
         private Type _employeeType;
         private PropertyInfo[] _deptProperties;
         private PropertyInfo[] _employeeProperties;
-        private DbContextOptions<EMSDbContext> _options1;
+        // private DbContextOptions<EMSDbContext> _options1;
 
 
 
@@ -36,13 +36,13 @@ namespace dotnetapp.Tests
                 .UseInMemoryDatabase(databaseName: "TestDatabase")
                 .Options;
 
-            _options1 = new DbContextOptionsBuilder<EMSDbContext>()
-                .UseInMemoryDatabase(databaseName: "TestDatabase1")
-                .Options;
+            // _options1 = new DbContextOptionsBuilder<EMSDbContext>()
+            //     .UseInMemoryDatabase(databaseName: "TestDatabase1")
+            //     .Options;
 
             _context = new EMSDbContext(options);
 
-            using (var context = new EMSDbContext(_options1))
+            using (var context = new EMSDbContext(_options))
             {
                 // Add test data to the in-memory database
                 context.Employees.Add(new Employee
@@ -135,7 +135,7 @@ namespace dotnetapp.Tests
         [Test]
         public void Employee_Email_Should_Be_Unique()
         {
-            using (var context = new EMSDbContext(_options1))
+            using (var context = new EMSDbContext(_options))
             {
                 // Attempt to add an employee with a duplicate email
                 var duplicateEmployee = new Employee
