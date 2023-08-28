@@ -103,11 +103,36 @@ namespace dotnetapp.Tests
             //         {
             // var context = new ApplicationDbContext();
         
-            var propertyInfo = _context.GetType().GetProperty("Bookings");
+            var propertyInfo = _context.GetType().GetProperty("Depts");
         
             Assert.IsNotNull(propertyInfo);
-            Assert.AreEqual(typeof(DbSet<Booking>), propertyInfo.PropertyType);
+            Assert.AreEqual(typeof(DbSet<Dept>), propertyInfo.PropertyType);
                     // }
+        }
+
+         [Test]
+public void UniqueEmailConstraint_ChecksForDuplicateEmails()
+{
+    // Arrange
+    var existingEmployee = new Employee { Name = "John Doe", Email = "john@example.com", Deptid = 1 };
+    _context.Employees.Add(existingEmployee);
+    _context.SaveChanges();
+
+    var newEmployee = new Employee { Name = "Jane Smith", Email = "john@example.com", Deptid = 1 };
+
+    // Act & Assert
+    Assert.Throws<DbUpdateException>(() => _context.Employees.Add(newEmployee));
+}
+
+
+         [Test]
+        public void SalaryConstraint_ChecksForNegativeSalary()
+        {
+            // Arrange
+            var newEmployee = new Employee { Name = "Jane Smith", Email = "jane@example.com", Deptid = 1, Salary = -100 };
+
+            // Act & Assert
+            Assert.Throws<DbUpdateException>(() => _context.Employees.Add(newEmployee));
         }
     }
 }
