@@ -119,7 +119,7 @@ namespace dotnetapp.Tests
         }
 
         [Test]
-        public void EMSDbContextContainsDbSetDempProperty()
+        public void EMSDbContextContainsDbSetDept_Property()
         {
             // using (var context = new ApplicationDbContext(_dbContextOptions))
             //         {
@@ -133,18 +133,21 @@ namespace dotnetapp.Tests
         }
 
         [Test]
-        public void ApplicationDbContextContainsDbSetSlotProperty()
+        public void EMSDbContextContainsDbSet_Employee_Property()
         {
             // using (var context = new ApplicationDbContext(_dbContextOptions))
             //         {
             // var context = new ApplicationDbContext();
         
-            var propertyInfo = _context.GetType().GetProperty("Depts");
+            var propertyInfo = _context.GetType().GetProperty("Employees");
         
             Assert.IsNotNull(propertyInfo);
-            Assert.AreEqual(typeof(DbSet<Dept>), propertyInfo.PropertyType);
+            Assert.AreEqual(typeof(DbSet<Employee>), propertyInfo.PropertyType);
                     // }
         }
+
+        
+        
 
         
     }
