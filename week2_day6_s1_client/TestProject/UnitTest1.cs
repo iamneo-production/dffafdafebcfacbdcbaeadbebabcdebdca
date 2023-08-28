@@ -12,10 +12,16 @@ namespace dotnetapp.Tests
     public class DatabaseTests
     {
         private EMSDbContext _context;
+        private Type _deptType;
+        private Type _employeeType;
+
 
         [SetUp]
         public void Setup()
         {
+            _deptType = new Dept().GetType();
+            _deptType = new Dept().GetType();
+
             // Set up the database context before running each test
             var options = new DbContextOptionsBuilder<EMSDbContext>()
                 .UseInMemoryDatabase(databaseName: "TestDatabase")
@@ -41,9 +47,15 @@ namespace dotnetapp.Tests
         }
 
         [Test]
-        public void Test_Student_Class_Exists()
+        public void Test_Dept_Class_Exists()
         {
-            Assert.NotNull(_studentType);
+            Assert.NotNull(_deptType);
+        }
+
+        [Test]
+        public void Test_Employee_Class_Exists()
+        {
+            Assert.NotNull(_deptType);
         }
     }
 }
