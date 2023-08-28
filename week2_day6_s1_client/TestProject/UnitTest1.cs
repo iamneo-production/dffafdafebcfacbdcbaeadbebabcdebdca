@@ -18,6 +18,8 @@ namespace dotnetapp.Tests
         private Type _employeeType;
         private PropertyInfo[] _deptProperties;
         private PropertyInfo[] _employeeProperties;
+        private DbContextOptions<EMSDbContext> _options1;
+
 
 
 
@@ -34,7 +36,27 @@ namespace dotnetapp.Tests
                 .UseInMemoryDatabase(databaseName: "TestDatabase")
                 .Options;
 
+            _options1 = new DbContextOptionsBuilder<EMSDbContext>()
+                .UseInMemoryDatabase(databaseName: "TestDatabase")
+                .Options;
+
             _context = new EMSDbContext(options);
+
+            using (var context = new EMSDbContext(_options1))
+            {
+                // Add test data to the in-memory database
+                context.Employees.Add(new Employee
+                {
+                    Id = 1,
+                    Name = "John Doe",
+                    Email = "john@example.com",
+                    Salary = 50000,
+                    Deptid = 1,
+                    Dateofbirth = new DateTime(1990, 1, 1)
+                });
+
+                context.SaveChanges();
+            }   
         }
 
         [Test]
@@ -111,30 +133,27 @@ namespace dotnetapp.Tests
         }
 
         [Test]
-public void UniqueEmailConstraint_ChecksForDuplicateEmails()
-{
-    // Arrange
-    var existingEmployee = new Employee { Name = "John Doe", Email = "john@example.com", Deptid = 1 };
-    _context.Employees.Add(existingEmployee);
-    _context.SaveChanges();
+        public void Employee_Email_Should_Be_Unique()
+        {
+            using (var context = new EMSDbContext(_options1))
+            {
+                // Attempt to add an employee with a duplicate email
+                var duplicateEmployee = new Employee
+                {
+                    Id = 2,
+                    Name = "Jane Doe",
+                    Email = "john@example.com", // Duplicate email
+                    Salary = 60000,
+                    Deptid = 2,
+                    Dateofbirth = new DateTime(1995, 5, 5)
+                };
 
-    var newEmployee = new Employee { Name = "Jane Smith", Email = "john@example.com", Deptid = 1 };
+                context.Employees.Add(duplicateEmployee);
 
-    try
-    {
-        // Act
-        _context.Employees.Add(newEmployee);
-        _context.SaveChanges();
-                Console.WriteLine("bye");
-
-    }
-    catch (DbUpdateException ex)
-    {
-        // Assert
-        Console.WriteLine("hai");
-        Assert.That(ex.InnerException, Is.TypeOf<Microsoft.Data.SqlClient.SqlException>());
-    }
-}
+                // SaveChanges should result in a DbUpdateException due to unique constraint violation
+                Assert.Throws<DbUpdateException>(() => context.SaveChanges());
+            }
+        }
 
 
 
