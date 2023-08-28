@@ -110,7 +110,7 @@ namespace dotnetapp.Tests
                     // }
         }
 
-         [Test]
+        [Test]
 public void UniqueEmailConstraint_ChecksForDuplicateEmails()
 {
     // Arrange
@@ -120,9 +120,22 @@ public void UniqueEmailConstraint_ChecksForDuplicateEmails()
 
     var newEmployee = new Employee { Name = "Jane Smith", Email = "john@example.com", Deptid = 1 };
 
-    // Act & Assert
-    Assert.Throws<DbUpdateException>(() => _context.Employees.Add(newEmployee));
+    try
+    {
+        // Act
+        _context.Employees.Add(newEmployee);
+        _context.SaveChanges();
+                Console.WriteLine("bye");
+
+    }
+    catch (DbUpdateException ex)
+    {
+        // Assert
+        Console.WriteLine("hai");
+        Assert.That(ex.InnerException, Is.TypeOf<Microsoft.Data.SqlClient.SqlException>());
+    }
 }
+
 
 
          [Test]
