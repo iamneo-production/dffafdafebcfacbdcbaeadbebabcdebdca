@@ -1,5 +1,10 @@
 using NUnit.Framework;
 using dotnetapp.Models; // Adjust the namespace to match your project
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace dotnetapp.Tests
 {
