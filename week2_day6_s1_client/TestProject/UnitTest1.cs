@@ -150,14 +150,14 @@ namespace dotnetapp.Tests
 public void Employee_ForeignKey_To_Dept_Should_Exist()
 {
     // Arrange
-    var dept = new Dept { Id = 10, Name = "Sample Department", Location = "Sample Location" };
+    var dept = new Dept { Id = 11, Name = "Sample Department", Location = "Sample Location" };
     var employee = new Employee
     {
-        Id = 10,
+        Id = 11,
         Name = "John Doe",
         Email = "john@example.com",
         Salary = 50000,
-        Deptid = 10, // Referencing the existing Department 1
+        Deptid = 112, // Referencing the existing Department 1
         Dateofbirth = new DateTime(1990, 1, 1)
     };
 
@@ -166,13 +166,14 @@ public void Employee_ForeignKey_To_Dept_Should_Exist()
     _context.Employees.Add(employee);
     _context.SaveChanges();
 
-    Console.WriteLine(Depts.);
 
     // Assert
-    var addedEmployee = _context.Employees.Find(1);
+    var addedEmployee = _context.Employees.Find(11);
+    Console.WriteLine("gai"+addedEmployee.Id);
+
     Assert.IsNotNull(addedEmployee);
-    // Assert.IsNotNull(addedEmployee.Dept);
-    // Assert.AreEqual("Sample Department", addedEmployee.Dept.Name);
+    Assert.IsNotNull(addedEmployee.Dept);
+    Assert.AreEqual("Sample Department", addedEmployee.Dept.Name);
 }
 
         
