@@ -7,7 +7,7 @@ namespace dotnetapp.Models
         public int Id { get; set; }
 
         [Required]
-        // [MaxLength(100)]
+        [MaxLength(100)]
         public string Title { get; set; }
 
         [Required]

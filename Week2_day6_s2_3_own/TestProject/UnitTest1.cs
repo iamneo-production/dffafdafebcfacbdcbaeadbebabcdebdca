@@ -115,9 +115,8 @@ namespace dotnetapp.Tests
         }
 
         [Test]
-        public void Session_2_TestTitlePropertyMaxLength()
+        public void Session_2_TestTitlePropertyMaxLength100()
         {
-            
             Assembly assembly = Assembly.Load("dotnetapp");
             _productType = assembly.GetType("dotnetapp.Models.Book");
             PropertyInfo titleProperty = _productType.GetProperty("Title");
@@ -125,6 +124,31 @@ namespace dotnetapp.Tests
             
             Assert.NotNull(maxLengthAttribute, "MaxLength attribute not found on Title property.");
             Assert.AreEqual(100, maxLengthAttribute.Length, "Title property should have a max length of 100.");
+        }
+
+        [Test]
+        public void Session_2_TestAuthorPropertyMaxLength50()
+        {            
+            Assembly assembly = Assembly.Load("dotnetapp");
+            _productType = assembly.GetType("dotnetapp.Models.Book");
+            PropertyInfo titleProperty = _productType.GetProperty("Author");
+            var maxLengthAttribute = titleProperty.GetCustomAttribute<MaxLengthAttribute>();
+            
+            Assert.NotNull(maxLengthAttribute, "MaxLength attribute not found on Author property.");
+            Assert.AreEqual(50, maxLengthAttribute.Length, "Author property should have a max length of 50.");
+        }
+
+        [Test]
+        public void Session_2_TestPublishedYearPropertyRange()
+        {
+            Assembly assembly = Assembly.Load("dotnetapp");
+            _productType = assembly.GetType("dotnetapp.Models.Book");
+            PropertyInfo publishedYearProperty = _productType.GetProperty("PublishedYear");
+            var rangeAttribute = publishedYearProperty.GetCustomAttribute<RangeAttribute>();
+            
+            Assert.NotNull(rangeAttribute, "Range attribute not found on PublishedYear property.");
+            Assert.AreEqual(0, rangeAttribute.Minimum, "PublishedYear property should have a minimum value of 0.");
+            Assert.AreEqual(int.MaxValue, rangeAttribute.Maximum, "PublishedYear property should have a maximum value of int.MaxValue.");
         }
 
         // [Test]
