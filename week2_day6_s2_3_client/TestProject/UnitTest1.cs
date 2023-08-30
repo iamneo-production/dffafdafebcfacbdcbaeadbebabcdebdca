@@ -140,6 +140,7 @@ namespace dotnetapp.Tests
             Assert.IsTrue(viewsFolderExists, "Post folder does not exist.");
         }
 
+
         [Test]
         public void DisplayCustomers_ReturnsViewWithCustomers()
         {
