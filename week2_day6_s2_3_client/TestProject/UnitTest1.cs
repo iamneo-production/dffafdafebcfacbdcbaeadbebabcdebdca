@@ -101,22 +101,31 @@ namespace dotnetapp.Tests
 
 
         [Test]
-        public void Session_1_TestUnitPricePropertyType()
+        public void Session_1_TestDiscountPropertyType()
         {
             Assembly assembly = Assembly.Load("dotnetapp");
             _productType = assembly.GetType("dotnetapp.Models.Product");
-            PropertyInfo UnitPriceProperty = _productType.GetProperty("UnitPrice");
-            Assert.NotNull(UnitPriceProperty, "UnitPrice property does not exist.");
-            Assert.AreEqual(typeof(decimal), UnitPriceProperty.PropertyType, "UnitPrice property should be of type DateTime.");
+            PropertyInfo DiscountProperty = _productType.GetProperty("Discount");
+            Assert.NotNull(DiscountProperty, "Discount property does not exist.");
+            Assert.AreEqual(typeof(decimal), DiscountProperty.PropertyType, "Discount property should be of type DateTime.");
+        }
+
+        [Test]
+        public void Session_1_TestDiscountPropertyType_OrderDetail()
+        {
+            Assembly assembly = Assembly.Load("dotnetapp");
+            _productType = assembly.GetType("dotnetapp.Models.OrderDetail");
+            PropertyInfo DiscountProperty = _productType.GetProperty("Discount");
+            Assert.NotNull(DiscountProperty, "Discount property does not exist.");
+            Assert.AreEqual(typeof(float), DiscountProperty.PropertyType, "Discount property should be of type Float.");
         }
 
         [Test]
         public void Session_2_TestMigrationExists()
         {
-            relativeFolderPath = @"/home/coder/project/workspace/week2_day6_s2_3_client/dotnetapp/Migrations";
-            // fileName = "yourfile.txt";            
-            string fullPath = Path.Combine(TestContext.CurrentContext.TestDirectory, relativeFolderPath);
-            Assert.IsTrue(File.Exists(fullPath), $"File '{relativeFolderPath}' does not exist in folder '{relativeFolderPath}'.");
+            bool viewsFolderExists = Directory.Exists(@"/home/coder/project/workspace/week2_day6_s2_3_client/dotnetapp/Migrations");
+
+            Assert.IsTrue(viewsFolderExists, "Post folder does not exist.");
         }
     }
 }
