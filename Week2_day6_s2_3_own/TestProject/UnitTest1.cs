@@ -24,8 +24,8 @@ namespace dotnetapp.Tests
         private Assembly _assembly1;
         private string relativeFolderPath; // Set this to the relative path of the folder you want to check
         private string fileName; 
-        private Mock<OrdersDbContext> _mockContext;
-        private OrderController _controller;
+        private Mock<AppDbContext> _mockContext;
+        // private OrderController _controller;
 
         // private PostController _postcontroller;
         // private List<Post> _fakePosts;
@@ -54,28 +54,28 @@ namespace dotnetapp.Tests
 
 
         [Test]
-        public void Session_2_TestProduct_ClassExists()
+        public void Session_2_TestBook_ClassExists()
         {
             // Load the assembly at runtime
             Assembly assembly = Assembly.Load("dotnetapp");
-            Type postType = assembly.GetType("dotnetapp.Models.Product");
-            Assert.NotNull(postType, "Product class does not exist.");
+            Type postType = assembly.GetType("dotnetapp.Models.Book");
+            Assert.NotNull(postType, "Book class does not exist.");
         }
         [Test]
-        public void Session_2_TestCategory_ClassExists()
+        public void Session_2_TestLibraryCard_ClassExists()
         {
             // Load the assembly at runtime
             Assembly assembly = Assembly.Load("dotnetapp");
-            Type postType = assembly.GetType("dotnetapp.Models.Category");
-            Assert.NotNull(postType, "Category class does not exist.");
+            Type postType = assembly.GetType("dotnetapp.Models.LibraryCard");
+            Assert.NotNull(postType, "LibraryCard class does not exist.");
         }
         [Test]
-        public void Session_2_TestOrder_ClassExists()
+        public void Session_2_TestAppDbContext_ClassExists_in()
         {
             // Load the assembly at runtime
             Assembly assembly = Assembly.Load("dotnetapp");
-            Type postType = assembly.GetType("dotnetapp.Models.Order");
-            Assert.NotNull(postType, "Order class does not exist.");
+            Type postType = assembly.GetType("dotnetapp.Models.AppDbContext");
+            Assert.NotNull(postType, "AppDbContext class does not exist.");
         }
         [Test]
         public void Session_2_TestCustomer_ClassExists()
