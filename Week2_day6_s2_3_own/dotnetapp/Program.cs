@@ -1,7 +1,16 @@
+using dotnetapp.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Data.SqlClient;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<EMSDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("myconnstring")));
+
 
 var app = builder.Build();
 
