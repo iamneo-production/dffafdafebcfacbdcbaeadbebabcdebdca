@@ -36,18 +36,18 @@ namespace dotnetapp.Controllers // Replace with the actual namespace
             return View(orderDetails);
         }
 
-        public IActionResult DisplayCategoryInfo()
-        {
-            var categoryInfo = _context.Products
-                .GroupBy(p => p.Category)
-                .Select(g => new CategoryInfoViewModel
-                {
-                    CategoryName = g.Key != null ? g.Key.CategoryName : "N/A",
-                    ProductCount = g.Count()
-                })
-                .ToList();
+        // public IActionResult DisplayCategoryInfo()
+        // {
+        //     var categoryInfo = _context.Products
+        //         .GroupBy(p => p.Category)
+        //         .Select(g => new CategoryInfoViewModel
+        //         {
+        //             CategoryName = g.Key != null ? g.Key.CategoryName : "N/A",
+        //             ProductCount = g.Count()
+        //         })
+        //         .ToList();
 
-            return View(categoryInfo);
-        }
+        //     return View(categoryInfo);
+        // }
     }
 }
