@@ -150,7 +150,13 @@ namespace dotnetapp.Tests
                 new Customer { CustomerID = "C2", CompanyName = "Company 2" }
             };
 
-            _mockContext.Setup(context => context.Customers).ReturnsDbSet(customers);
+            var mockSet = new Mock<DbSet<Customer>>();
+            mockSet.As<IQueryable<Customer>>().Setup(m => m.Provider).Returns(customers.AsQueryable().Provider);
+            mockSet.As<IQueryable<Customer>>().Setup(m => m.Expression).Returns(customers.AsQueryable().Expression);
+            mockSet.As<IQueryable<Customer>>().Setup(m => m.ElementType).Returns(customers.AsQueryable().ElementType);
+            mockSet.As<IQueryable<Customer>>().Setup(m => m.GetEnumerator()).Returns(customers.GetEnumerator());
+
+            _mockContext.Setup(context => context.Customers).Returns(mockSet.Object);
 
             // Act
             var result = _controller.DisplayCustomers() as ViewResult;
