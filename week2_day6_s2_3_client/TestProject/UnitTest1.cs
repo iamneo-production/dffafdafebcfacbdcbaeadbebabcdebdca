@@ -141,11 +141,31 @@ namespace dotnetapp.Tests
         }
 
         [Test]
-        public void Session_2_Test_DisplayCustomers_Action()
+        public void Session_3_Test_DisplayCustomers_Action()
         {
             Assembly assembly = Assembly.Load("dotnetapp");
             controllerType = assembly.GetType("dotnetapp.Controllers.OrderController");
             var detailsMethod = GetMethod(controllerType, "DisplayCustomers", new Type[] {  });
+
+            Assert.NotNull(detailsMethod);
+        }
+
+        [Test]
+        public void Session_3_Test_DisplayProductsWithCategories_Action()
+        {
+            Assembly assembly = Assembly.Load("dotnetapp");
+            controllerType = assembly.GetType("dotnetapp.Controllers.OrderController");
+            var detailsMethod = GetMethod(controllerType, "DisplayProductsWithCategories", new Type[] {  });
+
+            Assert.NotNull(detailsMethod);
+        }
+
+        [Test]
+        public void Session_3_Test_DisplayOrderDetails_Action()
+        {
+            Assembly assembly = Assembly.Load("dotnetapp");
+            controllerType = assembly.GetType("dotnetapp.Controllers.OrderController");
+            var detailsMethod = GetMethod(controllerType, "DisplayOrderDetails", new Type[] {  });
 
             Assert.NotNull(detailsMethod);
         }
