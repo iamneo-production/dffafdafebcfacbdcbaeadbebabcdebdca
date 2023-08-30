@@ -70,104 +70,104 @@ namespace dotnetapp.Tests
             Assert.NotNull(postType, "LibraryCard class does not exist.");
         }
         [Test]
-        public void Session_2_TestAppDbContext_ClassExists_in()
+        public void Session_2_TestAppDbContext_ClassExists_in_Models()
         {
             // Load the assembly at runtime
             Assembly assembly = Assembly.Load("dotnetapp");
             Type postType = assembly.GetType("dotnetapp.Models.AppDbContext");
             Assert.NotNull(postType, "AppDbContext class does not exist.");
         }
-        [Test]
-        public void Session_2_TestCustomer_ClassExists()
-        {
-            // Load the assembly at runtime
-            Assembly assembly = Assembly.Load("dotnetapp");
-            Type postType = assembly.GetType("dotnetapp.Models.Customer");
-            Assert.NotNull(postType, "Customer class does not exist.");
-        }
-        [Test]
-        public void Session_2_TestOrderDetail_ClassExists()
-        {
-            // Load the assembly at runtime
-            Assembly assembly = Assembly.Load("dotnetapp");
-            Type postType = assembly.GetType("dotnetapp.Models.OrderDetail");
-            Assert.NotNull(postType, "OrderDetails class does not exist.");
-        }
-        [Test]
-        public void Session_2_TestOrdersDbContext_ClassExists()
-        {
-            // Load the assembly at runtime
-            Assembly assembly = Assembly.Load("dotnetapp");
-            Type postType = assembly.GetType("dotnetapp.Models.OrdersDbContext");
-            Assert.NotNull(postType, "OrdersDbContext class does not exist.");
-        }
+        // [Test]
+        // public void Session_2_TestCustomer_ClassExists()
+        // {
+        //     // Load the assembly at runtime
+        //     Assembly assembly = Assembly.Load("dotnetapp");
+        //     Type postType = assembly.GetType("dotnetapp.Models.Customer");
+        //     Assert.NotNull(postType, "Customer class does not exist.");
+        // }
+        // [Test]
+        // public void Session_2_TestOrderDetail_ClassExists()
+        // {
+        //     // Load the assembly at runtime
+        //     Assembly assembly = Assembly.Load("dotnetapp");
+        //     Type postType = assembly.GetType("dotnetapp.Models.OrderDetail");
+        //     Assert.NotNull(postType, "OrderDetails class does not exist.");
+        // }
+        // [Test]
+        // public void Session_2_TestOrdersDbContext_ClassExists()
+        // {
+        //     // Load the assembly at runtime
+        //     Assembly assembly = Assembly.Load("dotnetapp");
+        //     Type postType = assembly.GetType("dotnetapp.Models.OrdersDbContext");
+        //     Assert.NotNull(postType, "OrdersDbContext class does not exist.");
+        // }
 
         [Test]
-        public void Session_2_TestUnitPricePropertyType()
+        public void Session_2_TestTitlePropertyType()
         {
             Assembly assembly = Assembly.Load("dotnetapp");
-            _productType = assembly.GetType("dotnetapp.Models.Product");
-            PropertyInfo UnitPriceProperty = _productType.GetProperty("UnitPrice");
+            _productType = assembly.GetType("dotnetapp.Models..Book");
+            PropertyInfo UnitPriceProperty = _productType.GetProperty("Title");
             Assert.NotNull(UnitPriceProperty, "UnitPrice property does not exist.");
-            Assert.AreEqual(typeof(decimal), UnitPriceProperty.PropertyType, "UnitPrice property should be of type DateTime.");
+            Assert.AreEqual(typeof(string), UnitPriceProperty.PropertyType, "UnitPrice property should be of type DateTime.");
         }
 
-        [Test]
-        public void Session_2_TestDiscountPropertyType_OrderDetail_table()
-        {
-            Assembly assembly = Assembly.Load("dotnetapp");
-            _productType = assembly.GetType("dotnetapp.Models.OrderDetail");
-            PropertyInfo DiscountProperty = _productType.GetProperty("Discount");
-            Assert.NotNull(DiscountProperty, "Discount property does not exist.");
-            Assert.AreEqual(typeof(float), DiscountProperty.PropertyType, "Discount property should be of type float.");
-        }
+        // [Test]
+        // public void Session_2_TestDiscountPropertyType_OrderDetail_table()
+        // {
+        //     Assembly assembly = Assembly.Load("dotnetapp");
+        //     _productType = assembly.GetType("dotnetapp.Models.OrderDetail");
+        //     PropertyInfo DiscountProperty = _productType.GetProperty("Discount");
+        //     Assert.NotNull(DiscountProperty, "Discount property does not exist.");
+        //     Assert.AreEqual(typeof(float), DiscountProperty.PropertyType, "Discount property should be of type float.");
+        // }
 
-        [Test]
-        public void Session_2_TestPicturePropertyType_Category_Table()
-        {
-            Assembly assembly = Assembly.Load("dotnetapp");
-            _productType = assembly.GetType("dotnetapp.Models.Category");
-            PropertyInfo PictureProperty = _productType.GetProperty("Picture");
-            Assert.NotNull(PictureProperty, "Picture property does not exist.");
-            Assert.AreEqual(typeof(byte[]), PictureProperty.PropertyType, "Picture property should be of type byte[].");
-        }
+        // [Test]
+        // public void Session_2_TestPicturePropertyType_Category_Table()
+        // {
+        //     Assembly assembly = Assembly.Load("dotnetapp");
+        //     _productType = assembly.GetType("dotnetapp.Models.Category");
+        //     PropertyInfo PictureProperty = _productType.GetProperty("Picture");
+        //     Assert.NotNull(PictureProperty, "Picture property does not exist.");
+        //     Assert.AreEqual(typeof(byte[]), PictureProperty.PropertyType, "Picture property should be of type byte[].");
+        // }
 
         [Test]
         public void Session_2_TestMigrationExists()
         {
-            bool viewsFolderExists = Directory.Exists(@"/home/coder/project/workspace/week2_day6_s2_3_client/dotnetapp/Migrations");
+            bool viewsFolderExists = Directory.Exists(@"/home/coder/project/workspace/Week2_day6_s2_3_own/dotnetapp/Migrations");
 
-            Assert.IsTrue(viewsFolderExists, "Post folder does not exist.");
+            Assert.IsTrue(viewsFolderExists, "Migrations does not exist.");
         }
 
-        [Test]
-        public void Session_3_Test_DisplayCustomers_Action()
-        {
-            Assembly assembly = Assembly.Load("dotnetapp");
-            controllerType = assembly.GetType("dotnetapp.Controllers.OrderController");
-            var detailsMethod = GetMethod(controllerType, "DisplayCustomers", new Type[] {  });
+        // [Test]
+        // public void Session_3_Test_DisplayCustomers_Action()
+        // {
+        //     Assembly assembly = Assembly.Load("dotnetapp");
+        //     controllerType = assembly.GetType("dotnetapp.Controllers.OrderController");
+        //     var detailsMethod = GetMethod(controllerType, "DisplayCustomers", new Type[] {  });
 
-            Assert.NotNull(detailsMethod);
-        }
+        //     Assert.NotNull(detailsMethod);
+        // }
 
-        [Test]
-        public void Session_3_Test_DisplayProductsWithCategories_Action()
-        {
-            Assembly assembly = Assembly.Load("dotnetapp");
-            controllerType = assembly.GetType("dotnetapp.Controllers.OrderController");
-            var detailsMethod = GetMethod(controllerType, "DisplayProductsWithCategories", new Type[] {  });
+        // [Test]
+        // public void Session_3_Test_DisplayProductsWithCategories_Action()
+        // {
+        //     Assembly assembly = Assembly.Load("dotnetapp");
+        //     controllerType = assembly.GetType("dotnetapp.Controllers.OrderController");
+        //     var detailsMethod = GetMethod(controllerType, "DisplayProductsWithCategories", new Type[] {  });
 
-            Assert.NotNull(detailsMethod);
-        }
+        //     Assert.NotNull(detailsMethod);
+        // }
 
-        [Test]
-        public void Session_3_Test_DisplayOrderDetails_Action()
-        {
-            Assembly assembly = Assembly.Load("dotnetapp");
-            controllerType = assembly.GetType("dotnetapp.Controllers.OrderController");
-            var detailsMethod = GetMethod(controllerType, "DisplayOrderDetails", new Type[] {  });
+        // [Test]
+        // public void Session_3_Test_DisplayOrderDetails_Action()
+        // {
+        //     Assembly assembly = Assembly.Load("dotnetapp");
+        //     controllerType = assembly.GetType("dotnetapp.Controllers.OrderController");
+        //     var detailsMethod = GetMethod(controllerType, "DisplayOrderDetails", new Type[] {  });
 
-            Assert.NotNull(detailsMethod);
-        }
+        //     Assert.NotNull(detailsMethod);
+        // }
     }
 }

@@ -143,3 +143,6 @@
 /home/coder/project/workspace/Week2_day6_s2_3_own/TestProject/obj/Debug/net6.0/TestProject.pdb
 /home/coder/project/workspace/Week2_day6_s2_3_own/TestProject/obj/Debug/net6.0/TestProject.genruntimeconfig.cache
 /home/coder/project/workspace/Week2_day6_s2_3_own/TestProject/obj/Debug/net6.0/ref/TestProject.dll
+/home/coder/project/workspace/Week2_day6_s2_3_own/TestProject/bin/Debug/net6.0/Castle.Core.dll
+/home/coder/project/workspace/Week2_day6_s2_3_own/TestProject/bin/Debug/net6.0/Microsoft.EntityFrameworkCore.InMemory.dll
+/home/coder/project/workspace/Week2_day6_s2_3_own/TestProject/bin/Debug/net6.0/Moq.dll
