@@ -97,27 +97,34 @@ namespace dotnetapp.Tests
             Assert.NotNull(postType, "OrdersDbContext class does not exist.");
         }
 
-
-
-
         [Test]
-        public void Session_1_TestDiscountPropertyType()
+        public void Session_2_TestUnitPricePropertyType()
         {
             Assembly assembly = Assembly.Load("dotnetapp");
             _productType = assembly.GetType("dotnetapp.Models.Product");
-            PropertyInfo DiscountProperty = _productType.GetProperty("Discount");
-            Assert.NotNull(DiscountProperty, "Discount property does not exist.");
-            Assert.AreEqual(typeof(decimal), DiscountProperty.PropertyType, "Discount property should be of type DateTime.");
+            PropertyInfo UnitPriceProperty = _productType.GetProperty("UnitPrice");
+            Assert.NotNull(UnitPriceProperty, "UnitPrice property does not exist.");
+            Assert.AreEqual(typeof(decimal), UnitPriceProperty.PropertyType, "UnitPrice property should be of type DateTime.");
         }
 
         [Test]
-        public void Session_1_TestDiscountPropertyType_OrderDetail()
+        public void Session_2_TestDiscountPropertyType_OrderDetail_table()
         {
             Assembly assembly = Assembly.Load("dotnetapp");
             _productType = assembly.GetType("dotnetapp.Models.OrderDetail");
             PropertyInfo DiscountProperty = _productType.GetProperty("Discount");
             Assert.NotNull(DiscountProperty, "Discount property does not exist.");
-            Assert.AreEqual(typeof(float), DiscountProperty.PropertyType, "Discount property should be of type Float.");
+            Assert.AreEqual(typeof(float), DiscountProperty.PropertyType, "Discount property should be of type float.");
+        }
+
+        [Test]
+        public void Session_2_TestPicturePropertyType_Category_Table()
+        {
+            Assembly assembly = Assembly.Load("dotnetapp");
+            _productType = assembly.GetType("dotnetapp.Models.Category");
+            PropertyInfo PictureProperty = _productType.GetProperty("Picture");
+            Assert.NotNull(PictureProperty, "Picture property does not exist.");
+            Assert.AreEqual(typeof(byte[]), PictureProperty.PropertyType, "Picture property should be of type byte[].");
         }
 
         [Test]
