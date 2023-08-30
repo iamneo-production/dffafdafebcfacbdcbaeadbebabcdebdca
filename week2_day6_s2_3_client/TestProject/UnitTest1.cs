@@ -170,16 +170,13 @@ namespace dotnetapp.Tests
         // }
 
         [Test]
-        public void Session_2_Test_Details_Action()
+        public void Session_2_Test_DisplayCustomers_Action()
         {
             Assembly assembly = Assembly.Load("dotnetapp");
             controllerType = assembly.GetType("dotnetapp.Controllers.OrderController");
-            var detailsMethod = GetMethod(controllerType, "DisplayCusomers", new Type[] {  });
+            var detailsMethod = GetMethod(controllerType, "DisplayCustomers", new Type[] {  });
 
             Assert.NotNull(detailsMethod);
-            //Assert.IsTrue(detailsMethod.IsPublic);
-            //Assert.AreEqual(typeof(ViewResult), detailsMethod.ReturnType);
-            // Add more assertions if needed
         }
     }
 }
