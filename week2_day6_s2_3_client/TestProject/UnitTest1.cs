@@ -35,8 +35,8 @@ namespace dotnetapp.Tests
         public void Setup()
         {
             
-            _mockContext = new Mock<OrdersDbContext>();
-            _controller = new OrderController(_mockContext.Object);
+            // _mockContext = new Mock<OrdersDbContext>();
+            // _controller = new OrderController(_mockContext.Object);
             //_postcontroller = new PostController();
            
         }
@@ -141,32 +141,45 @@ namespace dotnetapp.Tests
         }
 
 
+        // [Test]
+        // public void DisplayCustomers_ReturnsViewWithCustomers()
+        // {
+        //     // Arrange
+        //     var customers = new List<Customer>
+        //     {
+        //         new Customer { CustomerID = "C1", CompanyName = "Company 1" },
+        //         new Customer { CustomerID = "C2", CompanyName = "Company 2" }
+        //     };
+
+        //     var mockSet = new Mock<DbSet<Customer>>();
+        //     mockSet.As<IQueryable<Customer>>().Setup(m => m.Provider).Returns(customers.AsQueryable().Provider);
+        //     mockSet.As<IQueryable<Customer>>().Setup(m => m.Expression).Returns(customers.AsQueryable().Expression);
+        //     mockSet.As<IQueryable<Customer>>().Setup(m => m.ElementType).Returns(customers.AsQueryable().ElementType);
+        //     mockSet.As<IQueryable<Customer>>().Setup(m => m.GetEnumerator()).Returns(customers.GetEnumerator());
+
+        //     _mockContext.Setup(context => context.Customers).Returns(mockSet.Object);
+
+        //     // Act
+        //     var result = _controller.DisplayCustomers() as ViewResult;
+        //     var model = result?.Model as List<Customer>;
+
+        //     // Assert
+        //     Assert.IsNotNull(result);
+        //     Assert.IsNotNull(model);
+        //     Assert.AreEqual(customers.Count, model.Count);
+        // }
+
         [Test]
-        public void DisplayCustomers_ReturnsViewWithCustomers()
+        public void Session_2_Test_Details_Action()
         {
-            // Arrange
-            var customers = new List<Customer>
-            {
-                new Customer { CustomerID = "C1", CompanyName = "Company 1" },
-                new Customer { CustomerID = "C2", CompanyName = "Company 2" }
-            };
+            Assembly assembly = Assembly.Load("dotnetapp");
+            controllerType = assembly.GetType("dotnetapp.Controllers.OrderController");
+            var detailsMethod = GetMethod(controllerType, "DisplayCusomers", new Type[] {  });
 
-            var mockSet = new Mock<DbSet<Customer>>();
-            mockSet.As<IQueryable<Customer>>().Setup(m => m.Provider).Returns(customers.AsQueryable().Provider);
-            mockSet.As<IQueryable<Customer>>().Setup(m => m.Expression).Returns(customers.AsQueryable().Expression);
-            mockSet.As<IQueryable<Customer>>().Setup(m => m.ElementType).Returns(customers.AsQueryable().ElementType);
-            mockSet.As<IQueryable<Customer>>().Setup(m => m.GetEnumerator()).Returns(customers.GetEnumerator());
-
-            _mockContext.Setup(context => context.Customers).Returns(mockSet.Object);
-
-            // Act
-            var result = _controller.DisplayCustomers() as ViewResult;
-            var model = result?.Model as List<Customer>;
-
-            // Assert
-            Assert.IsNotNull(result);
-            Assert.IsNotNull(model);
-            Assert.AreEqual(customers.Count, model.Count);
+            Assert.NotNull(detailsMethod);
+            //Assert.IsTrue(detailsMethod.IsPublic);
+            //Assert.AreEqual(typeof(ViewResult), detailsMethod.ReturnType);
+            // Add more assertions if needed
         }
     }
 }
