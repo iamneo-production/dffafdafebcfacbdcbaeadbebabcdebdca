@@ -21,6 +21,6 @@ namespace dotnetapp.Models
         // [FutureDate]
         public DateTime ExpiryDate { get; set; }
 
-        // Remove ICollection<Book> Books from here
+        public Book Book { get; set; } // Navigation property
     }
 }

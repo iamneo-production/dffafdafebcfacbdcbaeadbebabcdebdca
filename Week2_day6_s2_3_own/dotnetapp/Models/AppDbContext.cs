@@ -32,11 +32,10 @@
 //     }
 // }
 
-
 using Microsoft.EntityFrameworkCore;
 using dotnetapp.Models;
 
-namespace dotnetapp.Data
+namespace dotnetapp.Models
 {
     public class AppDbContext : DbContext
     {
@@ -50,10 +49,17 @@ namespace dotnetapp.Data
                 .WithOne(lc => lc.Book)
                 .HasForeignKey<Book>(b => b.LibraryCardId);
 
+            // modelBuilder.Entity<LibraryCard>()
+            //     .HasOne(lc => lc.Book)
+            //     .WithOne(b => b.LibraryCard)
+            //     .HasForeignKey<LibraryCard>(lc => lc.BookId); // Use the appropriate property name
+
+
             // Other configurations
 
             base.OnModelCreating(modelBuilder);
         }
     }
 }
+
 

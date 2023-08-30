@@ -18,8 +18,8 @@ namespace dotnetapp.Models
         [Range(0, int.MaxValue)]
         public int PublishedYear { get; set; }
 
-        public int LibraryCardId { get; set; } // Change to non-nullable
+        public int LibraryCardId { get; set; }
 
-        public LibraryCard LibraryCard { get; set; } // Add this navigation property
+        public LibraryCard LibraryCard { get; set; } // Navigation property
     }
 }
