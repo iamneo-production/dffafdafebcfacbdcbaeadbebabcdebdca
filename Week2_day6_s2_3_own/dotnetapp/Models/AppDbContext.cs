@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using dotnetapp.Models;
 
 namespace dotnetapp.Models
 {
@@ -13,7 +14,7 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<Book>()
             .HasOne(b => b.LibraryCard)
             .WithOne(lc => lc.Book)
-            .HasForeignKey<Book>(b => b.LibraryCardId);
+            .HasForeignKey<LibraryCard>(lc => lc.BookId);
 
         modelBuilder.Entity<LibraryCard>()
             .HasMany(lc => lc.Books)
