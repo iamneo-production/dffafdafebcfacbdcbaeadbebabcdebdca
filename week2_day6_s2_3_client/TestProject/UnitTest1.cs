@@ -22,6 +22,9 @@ namespace dotnetapp.Tests
         private Type controllerType;
         private Type _viewType;
         private Assembly _assembly1;
+        private string relativeFolderPath; // Set this to the relative path of the folder you want to check
+        private string fileName; 
+
         // private PostController _postcontroller;
         // private List<Post> _fakePosts;
 
@@ -105,6 +108,15 @@ namespace dotnetapp.Tests
             PropertyInfo UnitPriceProperty = _productType.GetProperty("UnitPrice");
             Assert.NotNull(UnitPriceProperty, "UnitPrice property does not exist.");
             Assert.AreEqual(typeof(decimal), UnitPriceProperty.PropertyType, "UnitPrice property should be of type DateTime.");
+        }
+
+        [Test]
+        public void Session_2_TestMigrationExists()
+        {
+            relativeFolderPath = @"/home/coder/project/workspace/week2_day6_s2_3_client/dotnetapp/Migrations";
+            // fileName = "yourfile.txt";            
+            string fullPath = Path.Combine(TestContext.CurrentContext.TestDirectory, relativeFolderPath);
+            Assert.IsTrue(File.Exists(fullPath), $"File '{relativeFolderPath}' does not exist in folder '{relativeFolderPath}'.");
         }
     }
 }
