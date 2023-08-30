@@ -144,11 +144,35 @@ namespace dotnetapp.Tests
             Assembly assembly = Assembly.Load("dotnetapp");
             _productType = assembly.GetType("dotnetapp.Models.Book");
             PropertyInfo publishedYearProperty = _productType.GetProperty("PublishedYear");
-            var rangeAttribute = publishedYearProperty.GetCustomAttribute<RangeAttribute>();
+            var rangeAttribute = publishedYearProperty.GetCustomAttribute<System.ComponentModel.DataAnnotations.RangeAttribute>();
             
             Assert.NotNull(rangeAttribute, "Range attribute not found on PublishedYear property.");
             Assert.AreEqual(0, rangeAttribute.Minimum, "PublishedYear property should have a minimum value of 0.");
             Assert.AreEqual(int.MaxValue, rangeAttribute.Maximum, "PublishedYear property should have a maximum value of int.MaxValue.");
+        }
+
+        [Test]
+        public void Session_2_TestCardNumberPropertyRegularExpressionAttribute()
+        {
+            Assembly assembly = Assembly.Load("dotnetapp");
+            _productType = assembly.GetType("dotnetapp.Models.LibraryCard");            
+            PropertyInfo cardNumberProperty = _productType.GetProperty("CardNumber");
+            var regexAttribute = cardNumberProperty.GetCustomAttribute<RegularExpressionAttribute>();
+
+            Assert.NotNull(regexAttribute, "RegularExpression attribute not found on CardNumber property.");
+            Assert.AreEqual(@"LC-\d{5}", regexAttribute.Pattern, "CardNumber property should have the correct regular expression pattern.");
+        }
+
+        [Test]
+        public void Session_2_TestMemberNamePropertyMaxLength100()
+        {
+            Assembly assembly = Assembly.Load("dotnetapp");
+            _productType = assembly.GetType("dotnetapp.Models.LibraryCard");
+            PropertyInfo titleProperty = _productType.GetProperty("MemberName");
+            var maxLengthAttribute = titleProperty.GetCustomAttribute<MaxLengthAttribute>();
+            
+            Assert.NotNull(maxLengthAttribute, "MaxLength attribute not found on MemberName property.");
+            Assert.AreEqual(100, maxLengthAttribute.Length, "MemberName property should have a max length of 100.");
         }
 
         // [Test]
