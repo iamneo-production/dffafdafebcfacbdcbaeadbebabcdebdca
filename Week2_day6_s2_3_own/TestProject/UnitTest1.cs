@@ -2,6 +2,8 @@ using System;
 using System.Reflection;
 using NUnit.Framework;
 using dotnetapp.Models;
+using System.ComponentModel.DataAnnotations;
+
 // using dotnetapp.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http;
@@ -106,10 +108,23 @@ namespace dotnetapp.Tests
         public void Session_2_TestTitlePropertyType()
         {
             Assembly assembly = Assembly.Load("dotnetapp");
-            _productType = assembly.GetType("dotnetapp.Models..Book");
+            _productType = assembly.GetType("dotnetapp.Models.Book");
             PropertyInfo UnitPriceProperty = _productType.GetProperty("Title");
-            Assert.NotNull(UnitPriceProperty, "UnitPrice property does not exist.");
-            Assert.AreEqual(typeof(string), UnitPriceProperty.PropertyType, "UnitPrice property should be of type DateTime.");
+            Assert.NotNull(UnitPriceProperty, "Title property does not exist.");
+            Assert.AreEqual(typeof(string), UnitPriceProperty.PropertyType, "Title property should be of type String.");
+        }
+
+        [Test]
+        public void Session_2_TestTitlePropertyMaxLength()
+        {
+            
+            Assembly assembly = Assembly.Load("dotnetapp");
+            _productType = assembly.GetType("dotnetapp.Models.Book");
+            PropertyInfo titleProperty = _productType.GetProperty("Title");
+            var maxLengthAttribute = titleProperty.GetCustomAttribute<MaxLengthAttribute>();
+            
+            Assert.NotNull(maxLengthAttribute, "MaxLength attribute not found on Title property.");
+            Assert.AreEqual(100, maxLengthAttribute.Length, "Title property should have a max length of 100.");
         }
 
         // [Test]
