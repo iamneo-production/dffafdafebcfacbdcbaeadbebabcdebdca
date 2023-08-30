@@ -1,0 +1,29 @@
+@model List<OrderDetail>
+
+<h2>All Order Details</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Order Date</th>
+            <th>Product ID</th>
+            <th>Product Name</th>
+            <th>Unit Price</th>
+            <th>Quantity</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var orderDetail in Model)
+        {
+            <tr>
+                <td>@orderDetail.OrderID</td>
+                <td>@orderDetail.Order.OrderDate</td>
+                <td>@orderDetail.ProductID</td>
+                <td>@orderDetail.Product.ProductName</td>
+                <td>@orderDetail.UnitPrice</td>
+                <td>@orderDetail.Quantity</td>
+            </tr>
+        }
+    </tbody>
+</table>

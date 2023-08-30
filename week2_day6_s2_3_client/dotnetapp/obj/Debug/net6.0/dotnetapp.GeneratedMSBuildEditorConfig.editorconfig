@@ -23,8 +23,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[/home/coder/project/workspace/week2_day6_s2_3_client/dotnetapp/Views/Order/DisplayCategoryInfo.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT3JkZXIvRGlzcGxheUNhdGVnb3J5SW5mby5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/coder/project/workspace/week2_day6_s2_3_client/dotnetapp/Views/Order/DisplayCustomers.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT3JkZXIvRGlzcGxheUN1c3RvbWVycy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/coder/project/workspace/week2_day6_s2_3_client/dotnetapp/Views/Order/DisplayOrderDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT3JkZXIvRGlzcGxheU9yZGVyRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/coder/project/workspace/week2_day6_s2_3_client/dotnetapp/Views/Order/DisplayProductsWithCategories.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT3JkZXIvRGlzcGxheVByb2R1Y3RzV2l0aENhdGVnb3JpZXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/coder/project/workspace/week2_day6_s2_3_client/dotnetapp/Views/Shared/Error.cshtml]
