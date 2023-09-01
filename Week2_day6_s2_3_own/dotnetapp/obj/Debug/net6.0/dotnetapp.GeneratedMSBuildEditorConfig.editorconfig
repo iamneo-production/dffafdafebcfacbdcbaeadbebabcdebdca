@@ -23,6 +23,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[/home/coder/project/workspace/Week2_day6_s2_3_own/dotnetapp/Views/Library/DisplayAllBooks.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTGlicmFyeS9EaXNwbGF5QWxsQm9va3MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/coder/project/workspace/Week2_day6_s2_3_own/dotnetapp/Views/Library/DisplayBooksForLibraryCard.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTGlicmFyeS9EaXNwbGF5Qm9va3NGb3JMaWJyYXJ5Q2FyZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
