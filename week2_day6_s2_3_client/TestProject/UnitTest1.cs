@@ -169,5 +169,21 @@ namespace dotnetapp.Tests
 
             Assert.NotNull(detailsMethod);
         }
+
+        [Test]
+public void Session_3_Test_DisplayCustomers_Action_ReturnsViewResult()
+{
+    // Arrange
+    Assembly assembly = Assembly.Load("dotnetapp");
+    controllerType = assembly.GetType("dotnetapp.Controllers.OrderController");
+
+    // Act
+    var customersMethod = GetMethod(controllerType, "DisplayCustomers", new Type[] { });
+    var result = customersMethod.Invoke(Activator.CreateInstance(controllerType), null) as IActionResult;
+
+    // Assert
+    Assert.NotNull(result);
+    Assert.IsInstanceOf<ViewResult>(result);
+}
     }
 }
