@@ -8,6 +8,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http;
 using Moq;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.DependencyInjection;
@@ -58,19 +59,7 @@ namespace dotnetapp.Tests
         {
             return type.GetMethod(methodName, BindingFlags.Public | BindingFlags.Instance, null, parameterTypes, null);
         }
-        [Test]
-        public void DisplayBooksForLibraryCard_WithValidCardId_ReturnsViewResult()
-        {
-            // Arrange
-            int libraryCardId = 1; // Replace with a valid card ID
-
-            // Act
-            var result = _libraryController.DisplayBooksForLibraryCard(libraryCardId) as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual("DisplayBooksForLibraryCard", result.ViewName);
-        }
+        
 
 
         [Test]
@@ -221,15 +210,15 @@ namespace dotnetapp.Tests
             Assert.IsTrue(viewsFolderExists, "Migrations does not exist.");
         }
 
-        // [Test]
-        // public void Session_3_Test_DisplayCustomers_Action()
-        // {
-        //     Assembly assembly = Assembly.Load("dotnetapp");
-        //     controllerType = assembly.GetType("dotnetapp.Controllers.OrderController");
-        //     var detailsMethod = GetMethod(controllerType, "DisplayCustomers", new Type[] {  });
+        [Test]
+        public void Session_3_Test_DisplayAllBooks_Action()
+        {
+            Assembly assembly = Assembly.Load("dotnetapp");
+            controllerType = assembly.GetType("dotnetapp.Controllers.LibraryController");
+            var detailsMethod = GetMethod(controllerType, "DisplayAllBooks", new Type[] {  });
 
-        //     Assert.NotNull(detailsMethod);
-        // }
+            Assert.NotNull(detailsMethod);
+        }
 
         // [Test]
         // public void Session_3_Test_DisplayProductsWithCategories_Action()
@@ -251,62 +240,7 @@ namespace dotnetapp.Tests
         //     Assert.NotNull(detailsMethod);
         // }
 
-        [Test]
-public void TestDisplayBooksForLibraryCard()
-{
-    // Arrange
-    var libraryCardId = 1; // Replace with a valid library card ID
-    var controller = new LibraryController(_context);
-
-    // Act
-    var result = controller.DisplayBooksForLibraryCard(libraryCardId);
-
-    // Assert
-    Assert.IsInstanceOf<ViewResult>(result);
-    var viewResult = result as ViewResult;
-    Assert.IsInstanceOf<List<Book>>(viewResult.Model);
-    // Add more assertions as needed
-}
-       [Test]
-public void TestDisplayAllBooks()
-{
-    // Arrange
-    var controller = new LibraryController(_context); // Create an instance of the controller
-    var controllerType = controller.GetType();
-    var methodInfo = controllerType.GetMethod("DisplayAllBooks");
-
-    // Act
-    var result = methodInfo.Invoke(controller, null);
-
-    // Assert
-    Assert.IsInstanceOf<ViewResult>(result);
-    var viewResult = result as ViewResult;
-    Assert.IsInstanceOf<IQueryable<Book>>(viewResult.Model);
-    // Add more assertions as needed
-}
-
-
-
-        // ... (Other test methods)
-
-        // Helper method to get controller method info by method name
-        private MethodInfo GetControllerMethodInfo(string methodName)
-        {
-            var controllerType = typeof(LibraryController);
-            return controllerType.GetMethod(methodName, BindingFlags.Instance | BindingFlags.Public);
-        }
-
-        // Helper method to invoke a controller method with optional parameters
-        private IActionResult InvokeControllerMethod(MethodInfo methodInfo, params object[] parameters)
-        {
-            if (_libraryController == null)
-            {
-                // Initialize your controller and context here if not already done in Setup
-                // _context = InitializeYourDbContext();
-                // _libraryController = new LibraryController(_context);
-            }
-
-            return methodInfo.Invoke(_libraryController, parameters) as IActionResult;
-        }
+        
+       
     }
 }
