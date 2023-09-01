@@ -251,21 +251,24 @@ public void TestDisplayBooksForLibraryCard()
     Assert.IsInstanceOf<List<Book>>(viewResult.Model);
     // Add more assertions as needed
 }
-        [Test]
-        public void TestDisplayAllBooks()
-        {
-            // Arrange
-            var controllerMethodInfo = GetControllerMethodInfo("DisplayAllBooks");
+       [Test]
+public void TestDisplayAllBooks()
+{
+    // Arrange
+    var controller = new LibraryController(_context); // Create an instance of the controller
+    var controllerType = controller.GetType();
+    var methodInfo = controllerType.GetMethod("DisplayAllBooks");
 
-            // Act
-            var result = InvokeControllerMethod(controllerMethodInfo);
+    // Act
+    var result = methodInfo.Invoke(controller, null);
 
-            // Assert
-            Assert.IsInstanceOf<ViewResult>(result);
-            var viewResult = result as ViewResult;
-            Assert.IsInstanceOf<IQueryable<Book>>(viewResult.Model);
-            // Add more assertions as needed
-        }
+    // Assert
+    Assert.IsInstanceOf<ViewResult>(result);
+    var viewResult = result as ViewResult;
+    Assert.IsInstanceOf<IQueryable<Book>>(viewResult.Model);
+    // Add more assertions as needed
+}
+
 
 
         // ... (Other test methods)
