@@ -1,0 +1,10 @@
+@model List<Customer>
+
+<h2>All Customers</h2>
+
+<ul>
+    @foreach (var customer in Model)
+    {
+        <li>@customer.CompanyName - @customer.ContactName</li>
+    }
+</ul>
