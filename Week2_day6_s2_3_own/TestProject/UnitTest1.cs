@@ -3,8 +3,8 @@ using System.Reflection;
 using NUnit.Framework;
 using dotnetapp.Models;
 using System.ComponentModel.DataAnnotations;
-
-// using dotnetapp.Controllers;
+using dotnetapp.Controllers;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http;
 using Moq;
@@ -28,6 +28,8 @@ namespace dotnetapp.Tests
         private string fileName; 
         private Mock<AppDbContext> _mockContext;
         // private OrderController _controller;
+        private LibraryController _libraryController;
+        private AppDbContext _context;
 
         // private PostController _postcontroller;
         // private List<Post> _fakePosts;
@@ -52,6 +54,23 @@ namespace dotnetapp.Tests
         private static MethodInfo GetMethod(Type type, string methodName, Type[] parameterTypes)
         {
             return type.GetMethod(methodName, BindingFlags.Public | BindingFlags.Instance, null, parameterTypes, null);
+        }
+
+        [Test]
+        public void TestDisplayBooksForLibraryCard()
+        {
+            // Arrange
+            var libraryCardId = 1; // Replace with a valid library card ID
+            var controllerMethodInfo = GetControllerMethodInfo("DisplayBooksForLibraryCard");
+
+            // Act
+            var result = InvokeControllerMethod(controllerMethodInfo, libraryCardId);
+
+            // Assert
+            Assert.IsInstanceOf<ViewResult>(result);
+            var viewResult = result as ViewResult;
+            Assert.IsInstanceOf<IQueryable<Book>>(viewResult.Model);
+            // Add more assertions as needed
         }
 
 
