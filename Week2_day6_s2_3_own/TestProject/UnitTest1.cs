@@ -27,9 +27,7 @@ namespace dotnetapp.Tests
         private string relativeFolderPath; // Set this to the relative path of the folder you want to check
         private string fileName; 
         private Mock<AppDbContext> _mockContext;
-        // private OrderController _controller;
         private LibraryController _libraryController;
-        private AppDbContext _context;
 
         // private PostController _postcontroller;
         // private List<Post> _fakePosts;
@@ -54,23 +52,6 @@ namespace dotnetapp.Tests
         private static MethodInfo GetMethod(Type type, string methodName, Type[] parameterTypes)
         {
             return type.GetMethod(methodName, BindingFlags.Public | BindingFlags.Instance, null, parameterTypes, null);
-        }
-
-        [Test]
-        public void TestDisplayBooksForLibraryCard()
-        {
-            // Arrange
-            var libraryCardId = 1; // Replace with a valid library card ID
-            var controllerMethodInfo = GetControllerMethodInfo("DisplayBooksForLibraryCard");
-
-            // Act
-            var result = InvokeControllerMethod(controllerMethodInfo, libraryCardId);
-
-            // Assert
-            Assert.IsInstanceOf<ViewResult>(result);
-            var viewResult = result as ViewResult;
-            Assert.IsInstanceOf<IQueryable<Book>>(viewResult.Model);
-            // Add more assertions as needed
         }
 
 
@@ -251,5 +232,44 @@ namespace dotnetapp.Tests
 
         //     Assert.NotNull(detailsMethod);
         // }
+
+        [Test]
+        public void TestDisplayBooksForLibraryCard()
+        {
+            // Arrange
+            var libraryCardId = 1; // Replace with a valid library card ID
+            var controllerMethodInfo = GetControllerMethodInfo("DisplayBooksForLibraryCard");
+
+            // Act
+            var result = InvokeControllerMethod(controllerMethodInfo, libraryCardId);
+
+            // Assert
+            Assert.IsInstanceOf<ViewResult>(result);
+            var viewResult = result as ViewResult;
+            Assert.IsInstanceOf<IQueryable<Book>>(viewResult.Model);
+            // Add more assertions as needed
+        }
+
+        // ... (Other test methods)
+
+        // Helper method to get controller method info by method name
+        private MethodInfo GetControllerMethodInfo(string methodName)
+        {
+            var controllerType = typeof(LibraryController);
+            return controllerType.GetMethod(methodName, BindingFlags.Instance | BindingFlags.Public);
+        }
+
+        // Helper method to invoke a controller method with optional parameters
+        private IActionResult InvokeControllerMethod(MethodInfo methodInfo, params object[] parameters)
+        {
+            if (_libraryController == null)
+            {
+                // Initialize your controller and context here if not already done in Setup
+                // _context = InitializeYourDbContext();
+                // _libraryController = new LibraryController(_context);
+            }
+
+            return methodInfo.Invoke(_libraryController, parameters) as IActionResult;
+        }
     }
 }
