@@ -39,10 +39,12 @@ namespace dotnetapp.Tests
         [SetUp]
         public void Setup()
         {
-            
-            // _mockContext = new Mock<OrdersDbContext>();
-            // _controller = new OrderController(_mockContext.Object);
-            //_postcontroller = new PostController();
+            _dbContextOptions = new DbContextOptionsBuilder<AppDbContext>()
+                .UseInMemoryDatabase(databaseName: "InMemoryTestDatabase")
+                .Options;
+
+            var dbContext = new AppDbContext(_dbContextOptions);
+            _libraryController = new LibraryController(dbContext);
            
         }
 
@@ -55,6 +57,19 @@ namespace dotnetapp.Tests
         private static MethodInfo GetMethod(Type type, string methodName, Type[] parameterTypes)
         {
             return type.GetMethod(methodName, BindingFlags.Public | BindingFlags.Instance, null, parameterTypes, null);
+        }
+        [Test]
+        public void DisplayBooksForLibraryCard_WithValidCardId_ReturnsViewResult()
+        {
+            // Arrange
+            int libraryCardId = 1; // Replace with a valid card ID
+
+            // Act
+            var result = _libraryController.DisplayBooksForLibraryCard(libraryCardId) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual("DisplayBooksForLibraryCard", result.ViewName);
         }
 
 
