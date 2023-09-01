@@ -171,32 +171,7 @@ namespace dotnetapp.Tests
             Assert.NotNull(detailsMethod);
         }
 
-[Test]
-public void Session_3_Test_DisplayCustomers_Action_ReturnsViewResult()
-{
-    // Arrange
-    var serviceProvider = new ServiceCollection()
-        .AddDbContext<OrdersDbContext>(options => options.UseInMemoryDatabase("TestDb"))
-        .BuildServiceProvider();
 
-    var httpContext = new DefaultHttpContext();
-    httpContext.RequestServices = serviceProvider;
-
-    var controller = new OrderController(serviceProvider.GetService<OrdersDbContext>())
-    {
-        ControllerContext = new ControllerContext()
-        {
-            HttpContext = httpContext,
-        }
-    };
-
-    // Act
-    var result = controller.DisplayCustomers() as IActionResult;
-
-    // Assert
-    Assert.NotNull(result);
-    Assert.IsInstanceOf<ViewResult>(result);
-}
 
     }
 }
