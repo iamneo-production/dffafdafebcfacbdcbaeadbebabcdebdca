@@ -27,8 +27,9 @@ namespace dotnetapp.Tests
         private string relativeFolderPath; // Set this to the relative path of the folder you want to check
         private string fileName; 
         private Mock<AppDbContext> _mockContext;
-        private LibraryController _libraryController;
         private AppDbContext _context;
+        private LibraryController _libraryController;
+        private DbContextOptions<AppDbContext> _dbContextOptions;
 
 
         // private PostController _postcontroller;
