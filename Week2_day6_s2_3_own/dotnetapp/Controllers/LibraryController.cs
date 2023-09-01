@@ -18,13 +18,22 @@ namespace dotnetapp.Controllers
 
         // Implement a method to display books associated with a library card.
         public IActionResult DisplayBooksForLibraryCard(int libraryCardId)
-        {
-            var books = _context.Books
-                .Where(b => b.LibraryCardId == libraryCardId)
-                .ToList();
+{
+    var libraryCard = _context.LibraryCards.FirstOrDefault(lc => lc.Id == libraryCardId);
 
-            return View(books);
-        }
+    if (libraryCard == null)
+    {
+        // Handle the case where the library card with the given ID doesn't exist.
+        return NotFound(); // Return a 404 Not Found response or handle it as needed.
+    }
+
+    var books = _context.Books
+        .Where(b => b.LibraryCardId == libraryCardId)
+        .ToList();
+
+    return View(books);
+}
+
 
         // Implement a method to display all books in the library.
         public IActionResult DisplayAllBooks()

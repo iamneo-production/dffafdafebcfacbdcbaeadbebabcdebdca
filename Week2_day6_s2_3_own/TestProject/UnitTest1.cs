@@ -28,6 +28,8 @@ namespace dotnetapp.Tests
         private string fileName; 
         private Mock<AppDbContext> _mockContext;
         private LibraryController _libraryController;
+        private AppDbContext _context;
+
 
         // private PostController _postcontroller;
         // private List<Post> _fakePosts;
@@ -234,14 +236,29 @@ namespace dotnetapp.Tests
         // }
 
         [Test]
-        public void TestDisplayBooksForLibraryCard()
+public void TestDisplayBooksForLibraryCard()
+{
+    // Arrange
+    var libraryCardId = 1; // Replace with a valid library card ID
+    var controller = new LibraryController(_context);
+
+    // Act
+    var result = controller.DisplayBooksForLibraryCard(libraryCardId);
+
+    // Assert
+    Assert.IsInstanceOf<ViewResult>(result);
+    var viewResult = result as ViewResult;
+    Assert.IsInstanceOf<List<Book>>(viewResult.Model);
+    // Add more assertions as needed
+}
+        [Test]
+        public void TestDisplayAllBooks()
         {
             // Arrange
-            var libraryCardId = 1; // Replace with a valid library card ID
-            var controllerMethodInfo = GetControllerMethodInfo("DisplayBooksForLibraryCard");
+            var controllerMethodInfo = GetControllerMethodInfo("DisplayAllBooks");
 
             // Act
-            var result = InvokeControllerMethod(controllerMethodInfo, libraryCardId);
+            var result = InvokeControllerMethod(controllerMethodInfo);
 
             // Assert
             Assert.IsInstanceOf<ViewResult>(result);
@@ -249,6 +266,7 @@ namespace dotnetapp.Tests
             Assert.IsInstanceOf<IQueryable<Book>>(viewResult.Model);
             // Add more assertions as needed
         }
+
 
         // ... (Other test methods)
 
