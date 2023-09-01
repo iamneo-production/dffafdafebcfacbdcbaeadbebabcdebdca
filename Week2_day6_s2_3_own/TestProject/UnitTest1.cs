@@ -220,25 +220,35 @@ namespace dotnetapp.Tests
             Assert.NotNull(detailsMethod);
         }
 
-        // [Test]
-        // public void Session_3_Test_DisplayProductsWithCategories_Action()
-        // {
-        //     Assembly assembly = Assembly.Load("dotnetapp");
-        //     controllerType = assembly.GetType("dotnetapp.Controllers.OrderController");
-        //     var detailsMethod = GetMethod(controllerType, "DisplayProductsWithCategories", new Type[] {  });
+        [Test]
+        public void Session_3_Test_SearchBooksByTitle_Action()
+        {
+            Assembly assembly = Assembly.Load("dotnetapp");
+            Type controllerType = assembly.GetType("dotnetapp.Controllers.LibraryController");
+            var searchBooksByTitleMethod = GetMethod(controllerType, "SearchBooksByTitle", new Type[] { typeof(string) });
 
-        //     Assert.NotNull(detailsMethod);
-        // }
+            Assert.NotNull(searchBooksByTitleMethod);
+        }
 
-        // [Test]
-        // public void Session_3_Test_DisplayOrderDetails_Action()
-        // {
-        //     Assembly assembly = Assembly.Load("dotnetapp");
-        //     controllerType = assembly.GetType("dotnetapp.Controllers.OrderController");
-        //     var detailsMethod = GetMethod(controllerType, "DisplayOrderDetails", new Type[] {  });
+        [Test]
+        public void Session_3_Test_DisplayBooksForLibraryCard_Action()
+        {
+            Assembly assembly = Assembly.Load("dotnetapp");
+            Type controllerType = assembly.GetType("dotnetapp.Controllers.LibraryController");
+            var searchBooksByTitleMethod = GetMethod(controllerType, "DisplayBooksForLibraryCard", new Type[] { typeof(int) });
 
-        //     Assert.NotNull(detailsMethod);
-        // }
+            Assert.NotNull(searchBooksByTitleMethod);
+        }
+
+        [Test]
+        public void Session_3_Test_GetAvailableBooks_Action()
+        {
+            Assembly assembly = Assembly.Load("dotnetapp");
+            controllerType = assembly.GetType("dotnetapp.Controllers.LibraryController");
+            var detailsMethod = GetMethod(controllerType, "GetAvailableBooks", new Type[] {  });
+
+            Assert.NotNull(detailsMethod);
+        }
 
         
        
