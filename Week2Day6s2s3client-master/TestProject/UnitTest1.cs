@@ -169,5 +169,7 @@ namespace dotnetapp.Tests
 
             Assert.NotNull(detailsMethod);
         }
+
+        
     }
 }
