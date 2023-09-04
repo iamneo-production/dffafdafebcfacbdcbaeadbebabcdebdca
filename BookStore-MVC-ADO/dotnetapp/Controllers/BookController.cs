@@ -28,7 +28,7 @@ public class BookController : Controller
         Book book = GetBookByIdFromDatabase(id);
         if (book == null)
         {
-            return HttpNotFound();
+        return NotFound(); // Use NotFound instead of HttpNotFound
         }
         return View(book);
     }
