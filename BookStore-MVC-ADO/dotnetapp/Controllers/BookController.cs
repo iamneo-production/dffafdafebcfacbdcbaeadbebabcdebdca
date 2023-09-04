@@ -28,6 +28,31 @@ public class BookController : Controller
         return View(book);
     }
 
+    public ActionResult Create()
+    {
+        return View();
+    }
+
+    // POST: /Book/Create
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public ActionResult Create(Book book)
+    {
+        if (ModelState.IsValid)
+        {
+            if (AddBookToDatabase(book))
+            {
+                TempData["Message"] = "Book added successfully.";
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ModelState.AddModelError("", "An error occurred while adding the book.");
+            }
+        }
+        return View(book);
+    }
+
     // Helper methods for database interaction
     private List<Book> GetBooksFromDatabase()
     {
@@ -84,5 +109,34 @@ public class BookController : Controller
             }
         }
         return null;
+    }
+
+    private bool AddBookToDatabase(Book book)
+    {
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            connection.Open();
+            using (SqlCommand command = new SqlCommand(
+                "INSERT INTO Books (Title, Author, Genre, Price, Quantity) " +
+                "VALUES (@Title, @Author, @Genre, @Price, @Quantity)", connection))
+            {
+                command.Parameters.AddWithValue("@Title", book.Title);
+                command.Parameters.AddWithValue("@Author", book.Author);
+                command.Parameters.AddWithValue("@Genre", book.Genre);
+                command.Parameters.AddWithValue("@Price", book.Price);
+                command.Parameters.AddWithValue("@Quantity", book.Quantity);
+
+                try
+                {
+                    command.ExecuteNonQuery();
+                    return true; // Book added successfully
+                }
+                catch (Exception ex)
+                {
+                    // Log the error
+                    return false; // An error occurred while adding the book
+                }
+            }
+        }
     }
 }
