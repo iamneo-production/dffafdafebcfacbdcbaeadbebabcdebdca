@@ -1,9 +1,14 @@
 using System;
 using System.Collections.Generic;
-using System.Web.Mvc;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using dotnetapp.Models;
 using System.Data;
-using System.Data.SqlClient;
-using dotnetapp.Models; // Replace YourNamespace with the actual namespace of your models
+using Microsoft.Data.SqlClient;
+
 
 public class BookController : Controller
 {
