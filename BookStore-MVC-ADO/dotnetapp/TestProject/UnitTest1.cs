@@ -104,25 +104,25 @@ public void TestIndexMethodExists()
         }
 
         [Test]
-        public void TestidProperty()
+        public void TestBookIDProperty()
         {
             // Arrange
-            PropertyInfo idProperty = properties.FirstOrDefault(p => p.Name == "id");
+            PropertyInfo idProperty = properties.FirstOrDefault(p => p.Name == "BookID");
 
             // Assert
-            Assert.IsNotNull(idProperty, "id property should exist.");
-            Assert.AreEqual(typeof(int), idProperty.PropertyType, "id property should have data type 'int'.");
+            Assert.IsNotNull(idProperty, "BookID property should exist.");
+            Assert.AreEqual(typeof(int), idProperty.PropertyType, "BookID property should have data type 'int'.");
         }
 
         [Test]
-        public void TestNameProperty()
+        public void TestTitleProperty()
         {
             // Arrange
-            PropertyInfo productProperty = properties.FirstOrDefault(p => p.Name == "Name");
+            PropertyInfo productProperty = properties.FirstOrDefault(p => p.Name == "Title");
 
             // Assert
-            Assert.IsNotNull(productProperty, "Name property should exist.");
-            Assert.AreEqual(typeof(string), productProperty.PropertyType, "Name property should have data type 'string'.");
+            Assert.IsNotNull(productProperty, "Title property should exist.");
+            Assert.AreEqual(typeof(string), productProperty.PropertyType, "Title property should have data type 'string'.");
         }
     }
 }
