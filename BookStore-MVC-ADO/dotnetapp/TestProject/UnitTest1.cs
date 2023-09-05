@@ -135,11 +135,21 @@ public void TestIndexMethodExists()
             Assert.IsNotNull(productProperty, "Price property should exist.");
             Assert.AreEqual(typeof(decimal), productProperty.PropertyType, "Price property should have data type 'string'.");
         }
+        [Test]
+        public void TestQuantityProperty()
+        {
+            // Arrange
+            PropertyInfo productProperty = properties.FirstOrDefault(p => p.Name == "Quantity");
+
+            // Assert
+            Assert.IsNotNull(productProperty, "Quantity property should exist.");
+            Assert.AreEqual(typeof(int), productProperty.PropertyType, "Quantity property should have data type 'string'.");
+        }
 
         [Test]
         public void Test_CreateViewFile_Exists()
         {
-            string indexPath = Path.Combine(@"/home/coder/project/workspace/BookStore-MVC-ADO/dotnetapp/Views/Gym", "Create.cshtml");
+            string indexPath = Path.Combine(@"/home/coder/project/workspace/BookStore-MVC-ADO/dotnetapp/Views/Book", "Create.cshtml");
             bool indexViewExists = File.Exists(indexPath);
 
             Assert.IsTrue(indexViewExists, "Create.cshtml view file does not exist.");
@@ -148,7 +158,7 @@ public void TestIndexMethodExists()
         [Test]
         public void Test_IndexViewFile_Exists()
         {
-            string indexPath = Path.Combine(@"/home/coder/project/workspace/Gym-ADO-MVC/dotnetapp/Views/Gym", "Index.cshtml");
+            string indexPath = Path.Combine(@"/home/coder/project/workspace/BookStore-MVC-ADO/dotnetapp/Views/Book", "Index.cshtml");
             bool indexViewExists = File.Exists(indexPath);
 
             Assert.IsTrue(indexViewExists, "Index.cshtml view file does not exist.");
