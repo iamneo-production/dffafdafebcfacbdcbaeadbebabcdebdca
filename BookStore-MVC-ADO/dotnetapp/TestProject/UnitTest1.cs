@@ -124,5 +124,34 @@ public void TestIndexMethodExists()
             Assert.IsNotNull(productProperty, "Title property should exist.");
             Assert.AreEqual(typeof(string), productProperty.PropertyType, "Title property should have data type 'string'.");
         }
+
+        [Test]
+        public void TestPriceProperty()
+        {
+            // Arrange
+            PropertyInfo productProperty = properties.FirstOrDefault(p => p.Name == "Price");
+
+            // Assert
+            Assert.IsNotNull(productProperty, "Price property should exist.");
+            Assert.AreEqual(typeof(decimal), productProperty.PropertyType, "Price property should have data type 'string'.");
+        }
+
+        [Test]
+        public void Test_CreateViewFile_Exists()
+        {
+            string indexPath = Path.Combine(@"/home/coder/project/workspace/BookStore-MVC-ADO/dotnetapp/Views/Gym", "Create.cshtml");
+            bool indexViewExists = File.Exists(indexPath);
+
+            Assert.IsTrue(indexViewExists, "Create.cshtml view file does not exist.");
+        }
+
+        [Test]
+        public void Test_IndexViewFile_Exists()
+        {
+            string indexPath = Path.Combine(@"/home/coder/project/workspace/Gym-ADO-MVC/dotnetapp/Views/Gym", "Index.cshtml");
+            bool indexViewExists = File.Exists(indexPath);
+
+            Assert.IsTrue(indexViewExists, "Index.cshtml view file does not exist.");
+        }
     }
 }
