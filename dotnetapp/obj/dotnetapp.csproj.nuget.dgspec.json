@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\dotnetSolutions\\DotNetAngular\\dotnetapp\\dotnetapp.csproj": {}
+    "/home/coder/project/workspace/dotnetapp/dotnetapp.csproj": {}
   },
   "projects": {
-    "D:\\dotnetSolutions\\DotNetAngular\\dotnetapp\\dotnetapp.csproj": {
+    "/home/coder/project/workspace/dotnetapp/dotnetapp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\dotnetSolutions\\DotNetAngular\\dotnetapp\\dotnetapp.csproj",
+        "projectUniqueName": "/home/coder/project/workspace/dotnetapp/dotnetapp.csproj",
         "projectName": "dotnetapp",
-        "projectPath": "D:\\dotnetSolutions\\DotNetAngular\\dotnetapp\\dotnetapp.csproj",
-        "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-        "outputPath": "D:\\dotnetSolutions\\DotNetAngular\\dotnetapp\\obj\\",
+        "projectPath": "/home/coder/project/workspace/dotnetapp/dotnetapp.csproj",
+        "packagesPath": "/home/coder/.nuget/packages/",
+        "outputPath": "/home/coder/project/workspace/dotnetapp/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/home/coder/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -82,7 +82,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.408\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.414/RuntimeIdentifierGraph.json"
         }
       }
     }
